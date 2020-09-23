@@ -1,0 +1,25 @@
+{
+  "bitwise": true,
+  "camelcase": false,
+  "curly": true,
+  "eqnull": true,
+  "freeze": true,
+  "globals": {
+    "console": false,
+    "define": false,
+    "document": false,
+    "MockContainer": false,
+    "module": false,
+    "QUnit": false,
+    "require": false,
+    "test": false,
+    "window": false
+  },
+  "esversion": 8,
+  "indent": 2,
+  "maxlen": 80,
+  "noarg": true,
+  "nonew": true,
+  "quotmark": "single",
+  "undef": true
+}

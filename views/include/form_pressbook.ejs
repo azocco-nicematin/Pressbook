@@ -1,0 +1,146 @@
+
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2> Saisie du <script> document.write(new Date().toLocaleDateString()); </script></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+    
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+    
+                <div class="x_content">
+                    <form class="form-horizontal form-label-left" id="formulaire" action="/pressbook/saisie/req"   name="formPressbook">
+                        <div class="col-md-3 col-sm-3  ">
+                            Suppl.*
+                            <select class="form-control" id="suppl"  name="suppl">
+    
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-3  ">
+                            Parution*
+                            <input class="form-control" type="date" name="parution" id="parution" max='2040-01-01' required="required">
+                        </div>
+                        <div class="col-md-3 col-sm-3  ">
+                            Date Production prév*
+                            <input class="form-control" type="date" name="dateProd" id="dateProd"  max='2040-01-01' >
+                        </div>
+
+                        <div class="col-md-3 col-sm-3  ">
+                            Date Portage
+                            <input class="form-control" type="date" name="datePortage" id="datePortage"   max='2040-01-01'  >
+                        </div>
+    
+                        <br/><br/><br/><br/>
+                        
+                        <div class="col-md-3 col-sm-3  ">
+                            Thème
+                            <input class="form-control" type="text" id="theme" name="theme" required="required">
+                        </div>
+
+                            <div class="col-md-2 col-sm-3 ">
+                                Edition
+                                <select class="form-control" id="edition"  name="edition">
+                                    <option></option>
+                                </select>
+                            </div>
+                
+    
+                        <div class="col-md-2 col-sm-3 ">
+                            Produit
+                            <select class="form-control"  id="produit" name="produit">
+                            </select>
+                        </div>
+    
+                        <div class="col-md-2 col-sm-9 ">
+                            Fabr.
+                            <select id="fabr" class="select2_group form-control"  id="fabr"name="fabr">
+    
+                            </select>
+                        </div>
+                        <div class="col-md-1 col-sm-9 ">
+                            Papier
+                            <select id="papier" class="select2_group form-control" id="papier" name="papier">
+    
+                            </select>
+                        </div>
+    
+                        <div class="col-md-1 col-sm-3  ">
+                            Pagination
+                            <input class="form-control" type="number" id="pagination" name="pagination" >
+                        </div>
+
+                        <div class="col-md-1 col-sm-3  ">
+                            Nb. Quadri
+                            <input class="form-control" type="number" id="nbQuadri" name="nbQuadri" >
+                        </div>
+
+                        <br/><br/><br/><br/>
+
+                        <div class="col-md-3 col-sm-3  ">
+                            TAP
+                            <input class="form-control" type="number" id="tap" name="tap" >
+                        </div>
+
+                        
+                  
+                        
+             
+
+                        <div class="col-md-2 col-sm-3  ">
+                            Journaux
+                            <input class="form-control" type="text" id="journaux" name="journaux" >
+                        </div>
+
+                        <div class="col-md-2 col-sm-3  ">
+                            Tirage min.
+                            <input class="form-control" type="number"  id="tirageMin" name="tirageMin" >
+                        </div>
+
+                        
+
+                        <div class="col-md-2 col-sm-3 ">
+                            Origine
+                            <select class="form-control"  id="origine" name="origine">
+    
+                            </select>
+                        </div>
+                       
+                        <div class="col-md-3 col-sm-3 ">
+                            Source*
+                            <select class="form-control"  id="source" name="source">
+    
+                            </select>
+                        </div>
+                        <br/><br/><br/><br/>
+
+                        <div class="col-md-5 col-sm-3  ">
+                            Observation
+                            <input class="form-control" type="text" id="observation" name="observation" >
+                        </div>
+                        
+                        <div class="col-md-2 col-sm-3 ">
+                            Option/Reser
+                            <select class="form-control"  id="optionReser" name="optionReser">
+                                <option></option>
+                                <option>annulé</option>
+                            </select>
+                        </div>
+                       
+                        <br/><br/><br/><br/>
+                        <div class="form-group" style="margin-top: 10px">
+                            <div class="col-md-9 col-sm-9  offset-md-5">
+                                <button type="submit" class="btn btn-success sauvegardePressbook" onclick="javascript: form.method='POST';" >Créer</button>
+                                <button type="submit" class="btn btn-default modifierPressbook"  onclick="javascript: form.method='PUT';">Modifier et sauvegarder</button>
+                                <button type="submit" class="btn btn-danger supprimerPressbook"  onclick="javascript: form.method='DELETE';">Supprimer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
