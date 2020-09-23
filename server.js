@@ -15,6 +15,7 @@ moment.locale('fr');
 
 const supplementsPressbookController = require('./controllers/supplementsPressbookController');
 const parametrageElementsController= require('./controllers/parametrageElementsController');
+const supplementsFabricationController= require('./controllers/supplementsFabricationController');
 
 /* imports helpers */
 const serverHelpers = require('./helpers/serverHelpers');
@@ -199,16 +200,43 @@ app.get('/configuration/elements', async (req, res) => {
     if (!req.cookies.jwt) {
         return res.redirect('/');
     }
-
-    //objet pour passer en parametre aux pages ejs
     const droitUser = {service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste};
 
-    //let datetime = new Date();
-    //let regexp = new RegExp("^"+ datetime.toISOString().slice(0,10));
     if (droitUser.service !== 'null') {
     return res.render('elements', {infoUser: droitUser});
     }
 });
+
+
+app.get('/pressbook/saisie/dossier/id/:id', async (req , res) =>{
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    const droitUser = {service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste};
+
+    if (droitUser.service !== 'null') {
+    return res.render('formulaireFabrication', {infoUser: droitUser, id: req.params.id});
+    }
+  });
+
+  app.put('/pressbook/saisie/dossier/req', async (req , res) =>{
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    //console.log("aaaa"+req.body)
+    await supplementsFabricationController.updateFabrication(req, res, req.cookies.info, req.cookies.service);
+    
+  });
+
+  app.post('/pressbook/saisie/dossier/req', async (req , res) =>{
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await supplementsPressbookController.getSupplementId(req, res);
+  });
+
+
+// DATA
 
 
 app.get('/configuration/elements/req', async (req, res) => {
@@ -234,7 +262,7 @@ app.delete('/configuration/elements/req', async (req, res) => {
 
 
 
-// DATA
+
 
 app.get('/data/suppl', async (req, res) => {
     if (!req.cookies.jwt) {

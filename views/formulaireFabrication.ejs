@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<head>
+    <script>
+
+        window.onunload = function () { };
+        if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+            location.reload();
+        }
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NM - Suivi de Production </title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="73978724420-oup5ni5f6l2qt88bntrg4qvlugve1k91.apps.googleusercontent.com">
+    <!-- Bootstrap -->
+    <link rel="icon" type="image/png" href="/images/nm2.png" />
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="/vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/build/css/custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <!-- Roboto font (par Alexis)
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i&display=swap" rel="stylesheet">-->
+
+</head>
+
+<style>
+    .x_title h2 {
+        color: white;
+    }
+
+    .x_title h2 small {
+        color: white;
+    }
+
+    .x_title {
+        background: #2A3F54;
+    }
+
+    .lienTheme{
+        font-weight: bold;
+        color : #004080
+    }
+</style>
+
+<body class="nav-md thin">
+    <div class="container body">
+
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+
+                    <%- include('include/logoNm') %>
+                    <!-- menu profile quick info -->
+                    <%- include('include/bloc_profil') %>
+
+                    <div class="clearfix"></div>
+
+
+                    <!-- /menu profile quick info -->
+
+
+                    <%- include('include/menu_gauche') %>
+
+
+                    <!-- /menu footer buttons -->
+
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+
+                        <h3>Saisie des Suppléments</h3>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2 id="titreSupp"> 
+                                </h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                    
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                         
+                            <div class="x_content">
+                                <form class="form-horizontal form-label-left" id="formulaire" action="/pressbook/saisie/dossier/req"
+                                    name="formFabrication">
+                                    <div class="row">
+                                        <h2>INFORMATION GENERALES</h2>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Date de mise à dispo
+                                        <input class="form-control" type="date" name="dateDispo" id="dateDispo" max='2040-01-01'
+                                            >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 ">
+                                        Façonage
+                                        <select class="form-control" id="faconage" name="faconage">
+                                            <option></option>
+                                            <option>Oui</option>
+                                            <option>Non</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 ">
+                                        Mise sous film
+                                        <select class="form-control" id="miseSousFilm" name="miseSousFilm">
+                                            <option></option>
+                                            <option>Oui</option>
+                                            <option>Non</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </br></br>
+
+                                <div class="row">
+                                <h2>PREPRESSE</h2>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Contact final
+                                        <input class="form-control" type="text" id="contactFinal" name="contactFinal" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 ">
+                                        Mention légale
+                                        <select class="form-control" id="mentionLegale" name="mentionLegale">
+                                            <option></option>
+                                            <option>Ne peux pas etre vendu séparement</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 ">
+                                        Pages à montrer par NM
+                                        <select class="form-control" id="pageMontrer" name="pageMontrer">
+                                            <option></option>
+                                            <option>Oui</option>
+                                            <option>Produit fini</option>
+                                        </select>
+                                    </div>                                
+                                    <div class="col-md-4 col-sm-4 ">
+                                        Format
+                                        <select class="form-control" id="format" name="format">
+                                            <option></option>
+                                            <option>Italienne</option>
+                                            <option>Tabloid</option>
+                                            <option>1/2 Tabloid</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Source des DOCS
+                                        <input class="form-control" type="text" id="sourceDocs" name="sourceDocs" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Date de réception
+                                        <input class="form-control" type="date" name="dateReception" id="dateReception" max='2040-01-01'
+                                            >
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2 ">
+                                    <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" name="saisirFolio" id="saisirFolio" value="csqf"> Saisir Folio & num
+
+                                    </label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-2 col-sm-2 ">
+                                    <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" name="epreuveDefinitive" id="epreuveDefinitive" value="true"> Epreuve définitive
+                                    </label>
+                                    </div>
+                                    
+                                </div>
+                            </br></br></br>
+                                <div class="row">
+                                <h2> ROTATIVE</h2>
+                                    <div class="col-md-2 col-sm-2 ">
+                                        Blancheur
+                                        <select class="form-control" id="blancheur" name="blancheur">
+                                            <option></option>
+                                            <option>59</option>
+                                            <option>76</option>
+                                            <option>80</option>
+                                            <option>96</option>
+                                            <option>103</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Laize
+                                        <input class="form-control" type="text" id="laize" name="laize">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 ">
+                                        type de production
+                                        <select class="form-control" id="typeProduction" name="typeProduction">
+                                            <option></option>
+                                            <option>Accu</option>
+                                            <option>Double prod</option>
+                                        </select>
+                                    </div>
+                                    
+                 
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Remarque
+                                        <input class="form-control" type="text" id="remarque" name="remarque">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2 ">
+                                    <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" id="toutQuadri" name="toutQuadri" value=""> Tout quadri
+                                    </label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-2 col-sm-2 ">
+                                    <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" id="depassant14" name="depassant14" value=""> Dépassant 14mm
+                                    </label>
+                                    </div>
+                                    
+                                </div>
+
+                            </br></br></br>
+                                <div class="row">
+                                <h2>Expédition - Transport</h2>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Routage
+                                        <input class="form-control" type="text" id="routage" name="routage" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Date d'enlèvement'
+                                        <input class="form-control" type="date" name="dateEnlevement" id="dateEnlevement" max='2040-01-01'
+                                            >
+                                    </div>
+                                    
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Quantité mise sous film
+                                        <input class="form-control" type="text" id="quantiteSousFilm" name="quantiteSousFilm" >
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 ">
+                                        <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" id="coiffe" name="coiffe" value=""> Coiffe
+                                        </label>
+                                        </div>
+                                        
+                                    </div>
+                                
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Nom transporteur - 1
+                                        <input class="form-control" type="text" id="nomTransporteur1" name="nomTransporteur1" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Nombre d'exemplaire par paquet - 1
+                                        <input class="form-control" type="text" id="nombreExemplaire1" name="nombreExemplaire1" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                        Quantité par adresse - 1
+                                        <input class="form-control" type="text" id="quantiteAdresse1" name="quantiteAdresse1" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nom transporteur - 2
+                                        <input class="form-control" type="text" id="nomTransporteur2" name="nomTransporteur2" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nombre d'exemplaire par paquet - 2
+                                        <input class="form-control" type="text" id="nombreExemplaire2" name="nombreExemplaire2"  >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Quantité par adresse - 2
+                                        <input class="form-control" type="text" id="quantiteAdresse2" name="quantiteAdresse2" >
+                                    </div>
+                                
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nom transporteur - 3
+                                        <input class="form-control" type="text" id="nomTransporteur3" name="nomTransporteur3" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nombre d'exemplaire par paquet - 3
+                                        <input class="form-control" type="text" id="nombreExemplaire3" name="nombreExemplaire3"  >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Quantité par adresse - 3
+                                        <input class="form-control" type="text" id="quantiteAdresse3" name="quantiteAdresse3" >
+                                    </div>
+                                </br>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nom transporteur - 4
+                                        <input class="form-control" type="text" id="nomTransporteur4" name="nomTransporteur4" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nombre d'exemplaire par paquet - 4
+                                        <input class="form-control" type="text" id="nombreExemplaire4" name="nombreExemplaire4"  >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Quantité par adresse - 4
+                                        <input class="form-control" type="text" id="quantiteAdresse4" name="quantiteAdresse4" >
+                                    </div>
+                           
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nom transporteur - 5
+                                        <input class="form-control" type="text" id="nomTransporteur5" name="nomTransporteur5" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Nombre d'exemplaire par paquet - 5
+                                        <input class="form-control" type="text" id="nombreExemplaire5" name="nombreExemplaire5"  >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  ">
+                                    </br>
+                                        Quantité par adresse - 5
+                                        <input class="form-control" type="text" id="quantiteAdresse5" name="quantiteAdresse5" >
+                                    </div>  
+                                </div>
+                                   
+
+                                <div id="identifiantSupp" style="display: none;"><%= id%></div>
+                                
+
+                                    <div class="form-group" style="margin-top: 10px">
+                                        <div class="col-md-9 col-sm-9  offset-md-5">
+                                         
+                                            <button type="submit" class="btn btn-default modifierPressbook"
+                                                onclick="javascript: form.method='PUT';">Modifier et sauvegarder</button>
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+
+
+        <%- include('include/footer') %>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- DateJS -->
+    <script src="/vendors/DateJS/build/date.js"></script>
+
+    <!-- FastClick -->
+    <script src="/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Autosize -->
+    <script src="/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="/vendors/starrr/dist/starrr.js"></script>
+    <!-- PNotify -->
+    <script src="/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="/build/js/custom.min.js"></script>
+    <!-- Starrr util -->
+    <script src="/js/util_saisie.js"></script>
+
+    <script src="/vendors/pnotify/dist/pnotify.js"></script>
+    <script src="/vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+    <script src="/controllers/vueFormulaireFabricationController.js"></script>
+
+    <style type="text/css">
+        .table-bordered>tbody>tr>td {
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .table-bordered>tbody>tr>.rapport {
+            text-align: left;
+        }
+
+        .form-horizontal .control-label {
+            text-align: left;
+        }
+    </style>
+
+</body>
+
+</html>
+
+

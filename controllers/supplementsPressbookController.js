@@ -53,7 +53,6 @@ const createSupplement = async (req, res, infosConnectedUser, serviceUsers) => {
 const updateSupplement = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
         let id = req.body.idSupp;
-        console.log(id);
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
         await supplementsData.findById(id, function (err, doc) {
             if (err) {
@@ -247,7 +246,6 @@ const getSupplementsEnCours = async (req, res) => {
 
 const getSupplementId = async (req,res) =>{
     try {
-        console.log(req.body.identifiant)
         let doc = await supplementsData.findById(req.body.identifiant);
             res.status(200).json({
                 status: 'success',

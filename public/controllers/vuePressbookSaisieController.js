@@ -360,10 +360,10 @@ const createTableauSaisie = () => {
                 }
 
                 if (pressbook.dossier_fabrication === true) {
-                    cell21.innerHTML = "<a href=\"ddd\"><i class=\"fa fa-file-pdf-o fa-2x\"></i></a> <a href=\"pressbook/saisie/dossier/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
+                    cell21.innerHTML = "<a href=\"ddd\"><i class=\"fa fa-file-pdf-o fa-2x\"></i></a> <a href=\"/pressbook/saisie/dossier/id/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
                 }
                 else if (pressbook.dossier_fabrication === false) {
-                    cell21.innerHTML ="<a href=\"pressbook/saisie/dossier/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
+                    cell21.innerHTML ="<a href=\"/pressbook/saisie/dossier/id/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
                 }
 
 
