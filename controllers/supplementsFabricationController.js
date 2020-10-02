@@ -1,5 +1,5 @@
 const supplementsData = require('../models/supplementsPressbookData');
-
+const moment = require('../moment-with-locales');
 
 const updateFabrication = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
@@ -11,6 +11,7 @@ const updateFabrication = async (req, res, infosConnectedUser, serviceUsers) => 
             if (err) {
                 console.log("erreur");
             } else {
+                doc.date = moment();
                 doc.date_dispo = req.body.dateDispo;
                 doc.faconage = req.body.faconage;
                 doc.mise_sous_film = req.body.miseSousFilm;

@@ -32,7 +32,7 @@ $(document).ready(function () {
                     createTableauSaisie();
                        
                     new PNotify({
-                        title: 'Incident ajouté',
+                        title: 'Supplément ajouté',
                         text: 'Votre saisie à été prise en compte',
                         type: 'success',
                         styling: 'bootstrap3'
@@ -292,17 +292,17 @@ const createTableauSaisie = () => {
                 }
 
                 if (pressbook.parution) {
-                    cell5.innerHTML = pressbook.parution;
+                    cell5.innerHTML = moment(pressbook.parution).format('YYYY-MM-DD');
                     cell5.style.whiteSpace = "nowrap";
                 }
                 
                 if (pressbook.date_prod) {
-                    cell6.innerHTML = pressbook.date_prod;
+                    cell6.innerHTML = moment(pressbook.date_prod).format('YYYY-MM-DD');
                     cell6.style.whiteSpace = "nowrap";
                 }
 
                 if (pressbook.date_portage) {
-                    cell7.innerHTML = pressbook.date_portage;
+                    cell7.innerHTML = moment(pressbook.date_portage).format('YYYY-MM-DD');
                     cell7.style.whiteSpace = "nowrap";
                 }
 
@@ -360,7 +360,7 @@ const createTableauSaisie = () => {
                 }
 
                 if (pressbook.dossier_fabrication === true) {
-                    cell21.innerHTML = "<a href=\"ddd\"><i class=\"fa fa-file-pdf-o fa-2x\"></i></a> <a href=\"/pressbook/saisie/dossier/id/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
+                    cell21.innerHTML = "<a id="+pressbook._id+" onclick=\"pdf(this)\" ><i class=\"fa fa-file-pdf-o fa-2x\"></i></a> <a href=\"/pressbook/saisie/dossier/id/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
                 }
                 else if (pressbook.dossier_fabrication === false) {
                     cell21.innerHTML ="<a href=\"/pressbook/saisie/dossier/id/"+pressbook._id+"\"><i class=\"fa fa-pencil fa-2x\"></i></a>";
@@ -376,7 +376,30 @@ const createTableauSaisie = () => {
 
 };
 
+const pdf = (o)=>{
+    let id = $(o)[0].id;
+    console.log(id);
 
+    $.ajax({
+        type: "POST",
+        contentType : "application/json",
+        url: "/pressbook/saisie/pdf",
+        data: JSON.stringify({
+            "identifiant": id
+        }),
+        dataType : 'json',
+        success: function (data) {
+            console.log("bb");
+            new PNotify({
+                title: 'Pdf créé',
+                text: 'Votre saisie a été prise en compte',
+                type: 'success',
+                stylings: 'bootstrap3'
+            });
+            window.location.href = '/download';
+        }
+    });
+}
 
 
 const remplirForm = (o) =>{
@@ -394,9 +417,9 @@ const remplirForm = (o) =>{
         success: function (data) {
                 console.log(data.data);
                 $("#suppl").val(data.data.suppl);
-                $("#parution").val(data.data.parution);
-                $("#dateProd").val(data.data.date_prod);
-                $("#datePortage").val(data.data.date_portage);
+                $("#parution").val(moment(data.data.parution).format('YYYY-MM-DD'));
+                $("#dateProd").val(moment(data.data.date_prod).format('YYYY-MM-DD'));
+                $("#datePortage").val(moment(data.data.date_portage).format('YYYY-MM-DD'));
                 $("#theme").val(data.data.theme);
                 $("#edition").val(data.data.edition);
                 $("#produit").val(data.data.produit);
@@ -411,7 +434,6 @@ const remplirForm = (o) =>{
                 $("#source").val(data.data.source);
                 $("#observation").val(data.data.observation);
                 $("#optionReser").val(data.data.option_reser);
-                $(".sauvegardePressbook").attr("id", data.data._id);
                 $(".modifierPressbook").attr("id", data.data._id);
                 $(".supprimerPressbook").attr("id", data.data._id);
         }

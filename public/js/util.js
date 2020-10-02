@@ -15,7 +15,7 @@
             days: 3000
           },
           showDropdowns: true,
-          linkedCalendars: false,
+          linkedCalendars: true,
           showWeekNumbers: true,
           timePicker: false,
           timePickerIncrement: 1,

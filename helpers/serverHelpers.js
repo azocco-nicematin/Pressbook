@@ -19,7 +19,7 @@ const getUserInfos = async (service) => {
             prenom_nom: res.data.names[1].displayName,
             adresseMail: res.data.emailAddresses[0].value,
             photo: res.data.photos[0].url,
-            //service: "Expeditions",
+            //service: "Exprerfeditions",
             service: res.data.organizations[0].department,
             poste: res.data.organizations[0].title
         };
@@ -32,6 +32,9 @@ const serviceUser = async (service) => {
     try {
         let droitService;
         switch (service) {
+            case "Achat/Approvisionnement"  :
+                droitService = "Achat";
+                break;
             case "Maintenance Generale" :
             case "Mecanique" :
                 droitService = "Maintenance";
@@ -50,7 +53,7 @@ const serviceUser = async (service) => {
                 droitService = "Direction";
                 break;
             default :
-                droitService = "null";
+                droitService = "nullllllllllllll";
         }
         return droitService;
     } catch (e) {

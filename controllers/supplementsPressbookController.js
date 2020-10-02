@@ -8,12 +8,12 @@ const produitData = require('../models/produitData');
 const sourceData = require('../models/sourceData');
 const moment = require('../moment-with-locales');
 
-
 const createSupplement = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
         let item = {
             //date:  ,
+            date : moment(),
             date_du_jour: moment().format('DD/MM/YYYY'),
             portage: req.body.portage,
             theme: req.body.theme,
@@ -54,10 +54,11 @@ const updateSupplement = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
         let id = req.body.idSupp;
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
-        await supplementsData.findById(id, function (err, doc) {
+        await supplementsData.findById(id, async (err, doc) => {
             if (err) {
                 console.log("erreur");
             } else {
+                doc.date = moment();
                 doc.portage = req.body.portage;
                 doc.theme = req.body.theme;
                 doc.suppl = req.body.suppl;
@@ -79,11 +80,11 @@ const updateSupplement = async (req, res, infosConnectedUser, serviceUsers) => {
                 doc.option_reser = req.body.optionReser;
                 doc.serviceUser = serviceUsers;
                 doc.login = loginUser;
-                doc.save();
+                await doc.save();
+                res.status(200).json({
+                    status: 'success'
+                });
             }
-        });
-        res.status(200).json({
-            status: 'success'
         });
     } catch (err) {
         res.status(400).json({
@@ -227,9 +228,58 @@ const getDataSource = async (req, res) => {
     }
 };
 
+
+
 const getSupplementsEnCours = async (req, res) => {
     try {
-        let doc = await supplementsData.find();
+        let doc = await supplementsData.find(
+            {
+                parution :{
+                    $gte: moment().subtract(6, 'days')
+                }
+            }
+        ).sort( { parution : 1 } );
+            res.status(200).json({
+                status: 'success',
+                data: doc
+            });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        });
+    }
+};
+
+
+const getSupplementsListe = async (req, res) => {
+    try {
+        console.log(req.body);
+        let dateDebut = moment(req.body.dateDebut);
+        let dateFin = (moment(req.body.dateFin).add(1, 'days'));
+
+        const selectionDate = await supplementsData.find({
+            parution: {
+                $gte: dateDebut,
+                $lt: dateFin
+            }
+        });
+        console.log(selectionDate);
+        res.status(200).json({
+            status: 'success',
+            data: selectionDate
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        });
+    }
+};
+
+const getSupplementId = async (req,res) =>{
+    try {
+        let doc = await supplementsData.findById(req.body.identifiant);
             res.status(200).json({
                 status: 'success',
                 data: doc
@@ -241,16 +291,12 @@ const getSupplementsEnCours = async (req, res) => {
             message: err
         });
     }
-};
+}
 
-
-const getSupplementId = async (req,res) =>{
+const getSupplementId2 = async (req) =>{
     try {
-        let doc = await supplementsData.findById(req.body.identifiant);
-            res.status(200).json({
-                status: 'success',
-                data: doc
-            });
+        let doc = await supplementsData.findById(req.body.identifiant)
+            return doc;
          
     } catch (err) {
         res.status(404).json({
@@ -274,5 +320,7 @@ module.exports = {
     getDataSource: getDataSource,
 
     getSupplementsEnCours : getSupplementsEnCours,
-    getSupplementId : getSupplementId
+    getSupplementId : getSupplementId,
+    getSupplementId2,getSupplementId2,
+    getSupplementsListe : getSupplementsListe
 };

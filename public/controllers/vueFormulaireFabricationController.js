@@ -20,7 +20,7 @@ $(document).ready(function () {
                 url: url,
                 data: data,
                 success: function (data) {
-                    $("#formulaire")[0].reset();
+                  
                    // createTableauSaisie();
                     new PNotify({
                         title: 'supplément modifié',
@@ -59,7 +59,9 @@ const remplirForm = () =>{
         dataType : 'json',
         success: function (data) {
                 console.log(data.data);
-                $("#dateDispo").val(data.data.date_dispo);
+                if(data.data.date_dispo){
+                    $("#dateDispo").val(moment(data.data.date_dispo).format('YYYY-MM-DD'))
+                 } 
                 $("#faconage").val(data.data.faconage);
                 $("#miseSousFilm").val(data.data.mise_sous_film);
                 $("#contactFinal").val(data.data.contact_final);
@@ -67,8 +69,9 @@ const remplirForm = () =>{
                 $("#pageMontrer").val(data.data.pages_montrer);
                 $("#format").val(data.data.format);
                 $("#sourceDocs").val(data.data.source_docs);
-                $("#dateReception").val(data.data.date_reception);
-
+                if(data.data.date_reception){
+                $("#dateReception").val(moment(data.data.date_reception).format('YYYY-MM-DD'));
+                }
                 $("#saisirFolio").val("true");
                 if(data.data.saisir_folio === true){
                     $("#saisirFolio").prop("checked", true);
@@ -92,7 +95,9 @@ const remplirForm = () =>{
                 }
                 $("#routage").val(data.data.routage);
 
-                $("#dateEnlevement").val(data.data.date_enlevement);
+                if(data.data.date_enlevement){
+                $("#dateEnlevement").val(moment(data.data.date_enlevement).format('YYYY-MM-DD'));
+                }
                 $("#quantiteSousFilm").val(data.data.quantite_sous_film);
                 $("#coiffe").val("true");
                 if(data.data.coiffe === true){
