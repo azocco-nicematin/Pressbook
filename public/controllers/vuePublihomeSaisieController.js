@@ -124,10 +124,8 @@ $(document).ready(function () {
                 url: url,
                 data: data,
                 success: function (data) {
-                    // $("#formulaireTournee")[0].reset();
 
-                    //createTableauSaisiePublihome();
-
+                    $('#blocTournee').attr("style", "display:none");
                     new PNotify({
                         title: 'Publihome modifié',
                         text: 'Votre saisie à été prise en compte',
@@ -282,7 +280,7 @@ const createFormTournees = () => {
             data.data.forEach(element => {
 
                 let nomFormat = element.nom.replace(/ /g, "");
-                $('#tableListeTournees').append("<tr><td></td> <td> <input onclick=\"checkAll(this)\" type=\"checkbox\" name=" + nomFormat + " id=" + element._id + " value=" + nomFormat + "></td><td> <a id=" + element._id + " onclick=\"getTourneesEditions(this);\">" + element.nom + "</a></td></tr>");
+                $('#tableListeTournees').append("<tr><td></td> <td style=\"padding:0px 10px;\"> <input  onclick=\"checkAll(this)\" type=\"checkbox\" name=" + nomFormat + " id=" + element._id + " value=" + nomFormat + "></td><td style=text-align:left; > <a  id=" + element._id + " onclick=\"getTourneesEditions(this);\">" + element.nom + "</a></td></tr>");
 
             });
         }
@@ -314,7 +312,7 @@ const createFormTourneesTotales = () => {
         success: function (data) {
             data.data.forEach(element => {
                 let editionFormat = element.nom.replace(/ /g, "");
-                $('#listeTournees').append("<table class='table table-striped table-bordered bulk_action' id=" + editionFormat + " style=\"display : none\"> </table>");
+                $('#listeTournees').append("<table  class='table table-striped table-bordered bulk_action tableTourneeParEdition' id=" + editionFormat + " style=\"display : none\"><thead ><th colspan=\"2\"> "+element.nom+"</th></thead> </table>");
 
                 $.ajax({
                     type: "POST",
@@ -327,7 +325,7 @@ const createFormTourneesTotales = () => {
                     success: function (data) {
                         data.data.forEach(element => {
                             let editionFormat = element.edition.replace(/ /g, "");
-                            $('#' + editionFormat).append("<tr><td>  <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td> <label>" + element.nom_tournee + "</label></td></tr>");
+                            $('#' + editionFormat).append("<tr><td style=\"padding:0px 10px;\">  <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td style=text-align:left;> <label >" + element.nom_tournee + "</label></td></tr>");
 
                         });
 
@@ -391,7 +389,8 @@ const afficheTournee = (o) => {
         success: function (data) {
             data.data.forEach(element => {
                 let editionFormat = element.nom.replace(/ /g, "");
-                $('#listeTournees').append("<table class='table table-striped table-bordered bulk_action' id=" + editionFormat + " style=\"display : none\"> </table>");
+                
+                $('#listeTournees').append("<table  class='table table-striped table-bordered bulk_action tableTourneeParEdition' id=" + editionFormat + " style=\"display : none\"><thead ><th colspan=\"2\">"+element.nom+"</th></thead> </table>");
 
                 $.ajax({
                     type: "POST",
@@ -404,7 +403,7 @@ const afficheTournee = (o) => {
                     success: function (data) {
                         data.data.forEach(element => {
                             let editionFormat = element.edition.replace(/ /g, "");
-                            $('#' + editionFormat).append("<tr><td> <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td>  <label> " + element.nom_tournee + "</label></td></tr>");
+                            $('#' + editionFormat).append("<tr><td style=\"padding:0px 10px;\"> <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td style=text-align:left;>  <label> " + element.nom_tournee + "</label></td></tr>");
 
                         });
                     }
