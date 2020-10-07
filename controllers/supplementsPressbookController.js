@@ -244,6 +244,7 @@ const getSupplementsEnCours = async (req, res) => {
                 data: doc
             });
     } catch (err) {
+        console.log(err);
         res.status(404).json({
             status: 'fail',
             message: err

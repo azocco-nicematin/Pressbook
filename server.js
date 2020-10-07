@@ -19,7 +19,7 @@ const parametrageElementsController = require('./controllers/parametrageElements
 const supplementsFabricationController = require('./controllers/supplementsFabricationController');
 const publihomeController = require('./controllers/publihomeController');
 const pdfController = require('./controllers/pdfController');
-
+const parametrageTourneesController = require('./controllers/parametrageTourneesController');
 /* imports helpers */
 const serverHelpers = require('./helpers/serverHelpers');
 
@@ -27,7 +27,7 @@ const serverHelpers = require('./helpers/serverHelpers');
 const cookieParser = require('cookie-parser');
 
 const jwt = require('jsonwebtoken');
-
+ 
 
 // mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/mydb
 mongoose.connect(CONFIG.dbConfig, {
@@ -135,7 +135,17 @@ app.get('/pressbook/liste', async (req, res) => {
     if (!req.cookies.jwt) {
         return res.redirect('/');
     }
+    
+    //objet pour passer en parametre aux pages ejs
+    const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
+    //let datetime = new Date();
+    //let regexp = new RegExp("^"+ datetime.toISOString().slice(0,10));
+    if (droitUser.service !== 'null') {
+        return res.render('pressbook_rapport', { infoUser: droitUser });
+    }
+
+});
 
 app.get('/publihome/saisie', async (req, res) => {
     if (!req.cookies.jwt) {
@@ -161,6 +171,20 @@ app.post('/publihome/saisie/req', async (req, res) => {
     await publihomeController.createPublihome(req, res,  req.cookies.info, req.cookies.service)
 });
 
+app.put('/publihome/saisie/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await publihomeController.updatePublihome(req, res, req.cookies.info, req.cookies.service);
+});
+
+app.delete('/publihome/saisie/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await publihomeController.deletePublihome(req,res);
+});
+
 app.get('/publihome/saisie/req', async (req, res) => {
     if (!req.cookies.jwt) {
         return res.redirect('/');
@@ -169,6 +193,12 @@ app.get('/publihome/saisie/req', async (req, res) => {
     await publihomeController.getPublihomeEnCours(req,res);
 });
 
+app.post('/publihome/saisie/req/id', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await publihomeController.getPublihomeId(req, res);
+});
 
 
 app.post('/pressbook/saisie/req', async (req, res) => {
@@ -206,21 +236,13 @@ app.get('/pressbook/saisie/req/data', async (req, res) => {
     if (!req.cookies.jwt) {
         return res.redirect('/');
     }
+    console.log("gagagagaga");
     await supplementsPressbookController.getSupplementsEnCours(req, res);
 });
 
 
 
 
-    //objet pour passer en parametre aux pages ejs
-    const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
-
-    //let datetime = new Date();
-    //let regexp = new RegExp("^"+ datetime.toISOString().slice(0,10));
-    if (droitUser.service !== 'null') {
-        return res.render('pressbook_rapport', { infoUser: droitUser });
-    }
-});
 
 app.post('/pressbook/liste/req', async (req, res) => {
     if (!req.cookies.jwt) {
@@ -247,8 +269,40 @@ app.get('/configuration/elements', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('elements', { infoUser: droitUser });
+        return res.render('configuration_elements', { infoUser: droitUser });
     }
+});
+
+app.get('/configuration/tournees', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
+
+    if (droitUser.service !== 'null') {
+        return res.render('configuration_tournees', { infoUser: droitUser });
+    }
+});
+
+app.post('/configuration/tournees/req/data', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await parametrageTourneesController.getParamTournees(req, res);
+});
+
+app.post('/configuration/tournees/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await parametrageTourneesController.createTournee(req, res, req.cookies.info, req.cookies.service);
+});
+
+app.delete('/configuration/tournees/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await parametrageTourneesController.deleteTournee(req, res);
 });
 
 
@@ -280,6 +334,14 @@ app.get('/download', async (req, res) => {
 
 });
 
+app.put('/tournees/saisie/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/'); 
+    }
+    //console.log("aaaa"+req.body)
+    await publihomeController.updateTournees(req, res, req.cookies.info, req.cookies.service);
+
+});
 
 
 app.put('/pressbook/saisie/dossier/req', async (req, res) => {
@@ -325,7 +387,12 @@ app.delete('/configuration/elements/req', async (req, res) => {
 
 
 
-
+app.get('/data/get-edition', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await parametrageTourneesController.getEditions(req, res);
+});
 
 app.get('/data/suppl', async (req, res) => {
     if (!req.cookies.jwt) {

@@ -1,8 +1,11 @@
 
+
 $(document).ready(function () {
 
     createTableauSaisiePublihome();
-   
+    createFormTournees();
+    createFormTourneesTotales();
+
     $("#formulairePublihome").submit(function (e) {
 
         e.preventDefault();
@@ -11,16 +14,16 @@ $(document).ready(function () {
         let url = form.attr('action');
         let type = form.attr('method');
 
-        if(type === "POST"){
+        if (type === "POST") {
             $.ajax({
                 type: type,
                 url: url,
                 data: form.serialize(),
                 success: function (data) {
                     $("#formulairePublihome")[0].reset();
-                   
-                    createTableauSaisiePublihome ();
-                       
+
+                    createTableauSaisiePublihome();
+
                     new PNotify({
                         title: 'Publihome ajouté',
                         text: 'Votre saisie à été prise en compte',
@@ -39,18 +42,18 @@ $(document).ready(function () {
                 }
             });
         }
-        else if(type === "PUT"){
+        else if (type === "PUT") {
             let id = $(".modifierPublihome").attr('id');
-            let data = form.serialize()  + "&idSupp=" + id;
+            let data = form.serialize() + "&idSupp=" + id;
             $.ajax({
                 type: type,
                 url: url,
                 data: data,
                 success: function (data) {
                     $("#formulairePublihome")[0].reset();
-                   
-                    createTableauSaisie();
-                       
+
+                    createTableauSaisiePublihome();
+
                     new PNotify({
                         title: 'Publihome modifié',
                         text: 'Votre saisie à été prise en compte',
@@ -69,21 +72,21 @@ $(document).ready(function () {
                 }
             });
         }
-        else if(type === "DELETE"){
+        else if (type === "DELETE") {
             let id = $(".modifierPublihome").attr('id');
             $.ajax({
                 type: type,
-                contentType : "application/json",
+                contentType: "application/json",
                 url: url,
-                data : JSON.stringify({
-                    "idSupp" : id
+                data: JSON.stringify({
+                    "idSupp": id
                 }),
-                dataType : 'json',
+                dataType: 'json',
                 success: function (data) {
                     $("#formulairePublihome")[0].reset();
-                   
-                  //  createTableauSaisie();
-                       
+
+                    createTableauSaisiePublihome();
+
                     new PNotify({
                         title: 'Publihome supprimé',
                         text: 'Votre saisie à été prise en compte',
@@ -102,7 +105,49 @@ $(document).ready(function () {
                 }
             });
         }
-        
+
+    });
+
+
+    $("#formulaireTournee").submit(function (e) {
+
+        e.preventDefault();
+
+        let form = $(this);
+        let url = form.attr('action');
+        let type = form.attr('method');
+        if (type === "PUT") {
+            let id = $(".modifierTournee").attr('id');
+            let data = form.serialize() + "&idSupp=" + id;
+            $.ajax({
+                type: type,
+                url: url,
+                data: data,
+                success: function (data) {
+                    // $("#formulaireTournee")[0].reset();
+
+                    //createTableauSaisiePublihome();
+
+                    new PNotify({
+                        title: 'Publihome modifié',
+                        text: 'Votre saisie à été prise en compte',
+                        type: 'success',
+                        styling: 'bootstrap3'
+                    });
+
+                },
+                error: function (data) {
+                    new PNotify({
+                        title: 'Erreur serveur',
+                        text: 'L\'incident n\'as pas pu etre enregistré',
+                        type: 'error',
+                        styling: 'bootstrap3'
+                    });
+                }
+            });
+        }
+
+
     });
 
 });
@@ -143,51 +188,265 @@ const createTableauSaisiePublihome = () => {
                 }
 
                 if (publihome.titre) {
-                    cell3.innerHTML = "<a class=\"lienTitre\" href=\"#\" onclick=\"remplirFormPublihome(this)\">"+ publihome.titre+"</a>";
+                    cell3.innerHTML = "<a class=\"lienTitre\" href=\"#\" onclick=\"remplirFormPublihome(this); afficheTournee(this); \">" + publihome.titre + "</a>";
                     cell3.style.textAlign = "left";
                 }
 
                 if (publihome.type) {
                     cell4.innerHTML = publihome.type;
-                    
+
                 }
 
                 if (publihome.quantite_totale) {
                     cell5.innerHTML = publihome.quantite_totale;
-                    
+
                 }
 
                 if (publihome.date_portage) {
                     cell6.innerHTML = moment(publihome.date_portage).format('YYYY-MM-DD');
                     cell6.style.whiteSpace = "nowrap";
                 }
-                
+
                 if (publihome.poid) {
                     cell7.innerHTML = publihome.poid;
-              
+
                 }
 
                 if (publihome.nombres_pages) {
                     cell8.innerHTML = publihome.nombres_pages;
-               
+
                 }
 
                 if (publihome.conditionnement) {
                     cell9.innerHTML = publihome.conditionnement;
                 }
 
-                
+
                 if (publihome.commentaire) {
                     cell10.innerHTML = publihome.commentaire;
                 }
                 if (publihome.etat) {
                     cell11.innerHTML = publihome.etat;
-                    if(publihome.etat === "annulé"){
+                    if (publihome.etat === "Annulé") {
                         row.style.backgroundColor = "#737373";
                     }
                 }
             });
+            $(".modifierPublihome").attr("id", "");
+            $(".supprimerPublihome").attr("id", "");
         }
     });
 
 };
+
+
+const remplirFormPublihome = (o) => {
+
+    let id = $(o).closest("tr")[0].id;
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/publihome/saisie/req/id",
+        data: JSON.stringify({
+            "identifiant": id
+        }),
+        dataType: 'json',
+        success: function (data) {
+            $("#titre").val(data.data.titre);
+            $("#type").val(data.data.type);
+            $("#quantiteTotale").val(data.data.quantite_totale);
+            $("#datePortage").val(moment(data.data.date_portage).format('YYYY-MM-DD'));
+            $("#poid").val(data.data.poid);
+            $("#nombrePage").val(data.data.nombres_pages);
+            $("#conditionnement").val(data.data.conditionnement);
+            $("#commentaire").val(data.data.commentaire);
+            $("#etat").val(data.data.etat);
+            $(".modifierPublihome").attr("id", data.data._id);
+            $(".supprimerPublihome").attr("id", data.data._id);
+        }
+    });
+};
+
+
+
+const createFormTournees = () => {
+    $('#tableListeTournees').empty();
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/data/get-edition",
+        dataType: 'json',
+        success: function (data) {
+
+            data.data.forEach(element => {
+
+                let nomFormat = element.nom.replace(/ /g, "");
+                $('#tableListeTournees').append("<tr><td></td> <td> <input onclick=\"checkAll(this)\" type=\"checkbox\" name=" + nomFormat + " id=" + element._id + " value=" + nomFormat + "></td><td> <a id=" + element._id + " onclick=\"getTourneesEditions(this);\">" + element.nom + "</a></td></tr>");
+
+            });
+        }
+    });
+}
+
+
+
+const checkAll = (o) => {
+    let edition = $(o).val();
+    let editionFormat = edition.replace(/ /g, "");
+    if ($(o).is(':checked')) {
+        $('.' + editionFormat).prop('checked', true);
+
+    }
+    else {
+        $('.' + editionFormat).prop('checked', false);
+    }
+}
+
+
+const createFormTourneesTotales = () => {
+    $('#listeTournees').empty();
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/data/get-edition",
+        dataType: 'json',
+        success: function (data) {
+            data.data.forEach(element => {
+                let editionFormat = element.nom.replace(/ /g, "");
+                $('#listeTournees').append("<table class='table table-striped table-bordered bulk_action' id=" + editionFormat + " style=\"display : none\"> </table>");
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/configuration/tournees/req/data",
+                    data: JSON.stringify({
+                        "edition": element.nom
+                    }),
+                    dataType: 'json',
+                    success: function (data) {
+                        data.data.forEach(element => {
+                            let editionFormat = element.edition.replace(/ /g, "");
+                            $('#' + editionFormat).append("<tr><td>  <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td> <label>" + element.nom_tournee + "</label></td></tr>");
+
+                        });
+
+                    }
+                });
+
+
+            });
+        }
+    });
+}
+
+
+const verifyNotAll = (o) => {
+    let edition = $(o).attr('class');
+    console.log(edition);
+    if ($(o).is(':checked')) {
+        console.log('aaaa')
+
+    }
+    else {
+        $('input[name =' + edition + ']').prop('checked', false);
+    }
+}
+
+const getTourneesEditions = (o) => {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/data/get-edition",
+        dataType: 'json',
+        success: function (data) {
+            data.data.forEach(element => {
+                let editionFormat = element.nom.replace(/ /g, "");
+                $('#' + editionFormat).attr("style", "display:none");
+
+            });
+
+            const edition = $(o).html();
+            let editionFormat = edition.replace(/ /g, "");
+            $('#' + editionFormat).attr("style", "display:contents");
+        }
+    });
+
+}
+
+
+const afficheTournee = (o) => {
+    createFormTournees();
+    let id = $(o).closest("tr")[0].id;
+    $('#blocTournee').attr("style", "display:inline");
+    $('#titreTournee').html("Tournée - " + $(o).html());
+    $('.modifierTournee').attr("id", $(o).closest("tr")[0].id);
+
+    $('#listeTournees').empty();
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/data/get-edition",
+        dataType: 'json',
+        success: function (data) {
+            data.data.forEach(element => {
+                let editionFormat = element.nom.replace(/ /g, "");
+                $('#listeTournees').append("<table class='table table-striped table-bordered bulk_action' id=" + editionFormat + " style=\"display : none\"> </table>");
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/configuration/tournees/req/data",
+                    data: JSON.stringify({
+                        "edition": element.nom
+                    }),
+                    dataType: 'json',
+                    success: function (data) {
+                        data.data.forEach(element => {
+                            let editionFormat = element.edition.replace(/ /g, "");
+                            $('#' + editionFormat).append("<tr><td> <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td>  <label> " + element.nom_tournee + "</label></td></tr>");
+
+                        });
+                    }
+                });
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/publihome/saisie/req/id",
+                data: JSON.stringify({
+                    "identifiant": id
+                }),
+                dataType: 'json',
+                success: function (data) {
+                    data.data.id_tournee.forEach(element => {
+
+                        $("#" + element).prop("checked", true);
+                        uncheckEdition($("#" + element).attr('class'));
+                    });
+
+
+
+                }
+            });
+            //console.log(data.data)
+
+        }
+    });
+
+}
+
+
+const uncheckEdition = (o) => {
+    console.log(o);
+    let checkNumber = $('.' + o + ':checked').length
+    if (checkNumber == $('.' + o).length) {
+        $('input[name =' + o + ']').prop('checked', true);
+    }
+
+    // $( "<p>Test</p>" ).insertBefore($('input[name ='+o+']' ).parent()[0]);
+    console.log($($('input[name =' + o + ']').closest('td')[0]).children()[0]);
+    $($($('input[name =' + o + ']').closest('tr')[0]).children()[0]).text("(" + checkNumber + ")")
+
+
+}

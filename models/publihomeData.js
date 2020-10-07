@@ -17,6 +17,8 @@ const publihomeDataSchema = new Schema({
     commentaire :{type: String},
     etat : {type: String},
     statut: {type: String, default: 'ajouté'},
+    tournee : {type: Boolean, default: false},
+    id_tournee : [],
     login: {type: String},
     serviceUser: {type : String}
 }, {collection: 'publihome'});
