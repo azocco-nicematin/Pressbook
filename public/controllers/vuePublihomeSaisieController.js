@@ -326,13 +326,9 @@ const createFormTourneesTotales = () => {
                         data.data.forEach(element => {
                             let editionFormat = element.edition.replace(/ /g, "");
                             $('#' + editionFormat).append("<tr><td style=\"padding:0px 10px;\">  <input type=\"checkbox\" onclick=\"verifyNotAll(this)\" class=" + editionFormat + " name=\"tournee\" id=" + element._id + " value=" + element._id + "></td> <td style=text-align:left;> <label >" + element.nom_tournee + "</label></td></tr>");
-
                         });
-
                     }
                 });
-
-
             });
         }
     });
@@ -341,10 +337,7 @@ const createFormTourneesTotales = () => {
 
 const verifyNotAll = (o) => {
     let edition = $(o).attr('class');
-    console.log(edition);
     if ($(o).is(':checked')) {
-        console.log('aaaa')
-
     }
     else {
         $('input[name =' + edition + ']').prop('checked', false);
@@ -419,32 +412,26 @@ const afficheTournee = (o) => {
                 dataType: 'json',
                 success: function (data) {
                     data.data.id_tournee.forEach(element => {
-
                         $("#" + element).prop("checked", true);
                         uncheckEdition($("#" + element).attr('class'));
                     });
-
-
-
                 }
             });
-            //console.log(data.data)
-
         }
     });
 
 }
 
 
+
+//fonction qui uncheck l'edition si pas toutes les tournees sont selectioné
 const uncheckEdition = (o) => {
-    console.log(o);
     let checkNumber = $('.' + o + ':checked').length
     if (checkNumber == $('.' + o).length) {
         $('input[name =' + o + ']').prop('checked', true);
     }
 
     // $( "<p>Test</p>" ).insertBefore($('input[name ='+o+']' ).parent()[0]);
-    console.log($($('input[name =' + o + ']').closest('td')[0]).children()[0]);
     $($($('input[name =' + o + ']').closest('tr')[0]).children()[0]).text("(" + checkNumber + ")")
 
 

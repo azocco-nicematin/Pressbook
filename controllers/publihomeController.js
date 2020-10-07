@@ -71,7 +71,7 @@ const getPublihomeId = async (req,res) =>{
             message: err
         });
     }
-}
+};
 
 
 const updatePublihome = async (req, res, infosConnectedUser, serviceUsers) => {
@@ -139,6 +139,7 @@ const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
                 console.log("erreur");
             } else {
                 doc.id_tournee = req.body.tournee;
+                doc.tournee = true;
                 doc.serviceUser = serviceUsers;
                 doc.login = loginUser;
                 await doc.save();
@@ -154,7 +155,7 @@ const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
         });
     }
 
-}
+};
 
 
 module.exports = {
