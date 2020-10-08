@@ -96,8 +96,8 @@
               responsive: true
             });
           }
-          if ($(".datatable-buttons-exped").length) {
-            $(".datatable-buttons-exped").DataTable({
+          if ($(".datatable-buttons-tournee").length) {
+            $(".datatable-buttons-tournee").DataTable({
               dom: "Bfrtip",
               buttons: [
                 {
@@ -110,13 +110,16 @@
                 },
                 {
                   extend: "print",
-                  className: "btn-sm"
+                  className: "btn-sm",
+                  messageTop: '$("#sommeQuantite").text()'
                 },
               ],
               responsive: true,
-              "pageLength": 15
+              "pageLength": 400
             });
           }
+
+          
         };
 
         TableManageButtons = function() {
@@ -164,3 +167,6 @@
 
         TableManageButtons.init();
       });
+
+
+     

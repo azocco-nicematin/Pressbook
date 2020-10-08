@@ -20,7 +20,6 @@ $(document).ready(function () {
                 url: url,
                 data: form.serialize(),
                 success: function (data) {
-                    $("#formulairePublihome")[0].reset();
 
                     createTableauSaisiePublihome();
 
@@ -50,9 +49,10 @@ $(document).ready(function () {
                 url: url,
                 data: data,
                 success: function (data) {
-                    $("#formulairePublihome")[0].reset();
 
                     createTableauSaisiePublihome();
+                    createFormTournees();
+                    $('#blocTournee').attr("style", "display:none");
 
                     new PNotify({
                         title: 'Publihome modifié',
@@ -64,8 +64,8 @@ $(document).ready(function () {
                 },
                 error: function (data) {
                     new PNotify({
-                        title: 'Erreur serveur',
-                        text: 'L\'incident n\'as pas pu etre enregistré',
+                        title: 'Erreur',
+                        text: 'Vous n\'avait pas selecioné de publihome',
                         type: 'error',
                         styling: 'bootstrap3'
                     });
@@ -83,9 +83,11 @@ $(document).ready(function () {
                 }),
                 dataType: 'json',
                 success: function (data) {
-                    $("#formulairePublihome")[0].reset();
 
                     createTableauSaisiePublihome();
+                    
+                    createFormTournees();
+                    $('#blocTournee').attr("style", "display:none");
 
                     new PNotify({
                         title: 'Publihome supprimé',
@@ -97,8 +99,8 @@ $(document).ready(function () {
                 },
                 error: function (data) {
                     new PNotify({
-                        title: 'Erreur serveur',
-                        text: 'L\'incident n\'as pas pu etre enregistré',
+                        title: 'Erreur',
+                        text: 'Vous n\'avait pas selecioné de publihome',
                         type: 'error',
                         styling: 'bootstrap3'
                     });
@@ -124,20 +126,19 @@ $(document).ready(function () {
                 url: url,
                 data: data,
                 success: function (data) {
-
                     $('#blocTournee').attr("style", "display:none");
+                    createTableauSaisiePublihome();
                     new PNotify({
                         title: 'Publihome modifié',
                         text: 'Votre saisie à été prise en compte',
                         type: 'success',
                         styling: 'bootstrap3'
                     });
-
                 },
                 error: function (data) {
                     new PNotify({
                         title: 'Erreur serveur',
-                        text: 'L\'incident n\'as pas pu etre enregistré',
+                        text: '',
                         type: 'error',
                         styling: 'bootstrap3'
                     });
@@ -173,6 +174,7 @@ const createTableauSaisiePublihome = () => {
                 const cell9 = row.insertCell(8);
                 const cell10 = row.insertCell(9);
                 const cell11 = row.insertCell(10);
+                const cell12 = row.insertCell(11);
 
 
                 row.id = publihome._id;
@@ -223,8 +225,17 @@ const createTableauSaisiePublihome = () => {
                 if (publihome.commentaire) {
                     cell10.innerHTML = publihome.commentaire;
                 }
+
+                if (publihome.tournee) {
+                    cell11.innerHTML = "<a class=\"lienTitre\" href=\"/publihome/saisie/liste/id/"+publihome._id+"\" >Liste des tournées</a>";
+                }
+                else{
+                    cell11.innerHTML = "Tournée non renseigné";
+                }
+
+
                 if (publihome.etat) {
-                    cell11.innerHTML = publihome.etat;
+                    cell12.innerHTML = publihome.etat;
                     if (publihome.etat === "Annulé") {
                         row.style.backgroundColor = "#737373";
                     }
@@ -232,6 +243,7 @@ const createTableauSaisiePublihome = () => {
             });
             $(".modifierPublihome").attr("id", "");
             $(".supprimerPublihome").attr("id", "");
+            $("#formulairePublihome")[0].reset();
         }
     });
 

@@ -40,6 +40,7 @@ const createRapportPressbook = (dateDebut, dateFin) => {
                 
             });
             dataTable.draw();
+            
         }
     });
 

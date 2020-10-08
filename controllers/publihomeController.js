@@ -1,5 +1,7 @@
 const publihomeData = require('../models/publihomeData');
+const tourneesData = require('../models/tourneesData');
 const moment = require('../moment-with-locales');
+const mongoose = require('mongoose');
 
 
 const createPublihome = async (req, res, infosConnectedUser, serviceUsers) => {
@@ -158,11 +160,59 @@ const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
 };
 
 
+const getListeTourneesPublihome = async (req,res) =>{
+    
+    try {
+        let doc = await publihomeData.findById(req.body.id);
+        let idTournee = doc.id_tournee;
+        let listeTournee = await tourneesData.find({"_id": { "$in" : idTournee}});
+        console.log(listeTournee);
+        res.status(200).json({
+            status: 'success',
+            data: listeTournee
+        });
+         
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        });
+    }
+}
+
+
+const getPublihomeListe = async (req, res) => {
+    try {
+        let dateDebut = moment(req.body.dateDebut);
+        let dateFin = (moment(req.body.dateFin).add(1, 'days'));
+
+        const selectionDate = await publihomeData.find({
+            date_portage: {
+                $gte: dateDebut,
+                $lt: dateFin
+            }
+        });
+        console.log(selectionDate);
+        res.status(200).json({
+            status: 'success',
+            data: selectionDate
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        });
+    }
+};
+
 module.exports = {
     createPublihome : createPublihome,
     getPublihomeEnCours :getPublihomeEnCours,
     getPublihomeId :getPublihomeId,
     updatePublihome : updatePublihome,
     deletePublihome : deletePublihome,
-    updateTournees : updateTournees
+    updateTournees : updateTournees,
+    getListeTourneesPublihome :getListeTourneesPublihome,
+    getPublihomeListe :getPublihomeListe
 };

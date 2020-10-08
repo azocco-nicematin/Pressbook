@@ -57,7 +57,7 @@ const remplirForm = () =>{
             "identifiant": id
         }),
         dataType : 'json',
-        success: function (data) {
+        success:  (data) => {
                 console.log(data.data);
                 if(data.data.date_dispo){
                     $("#dateDispo").val(moment(data.data.date_dispo).format('YYYY-MM-DD'))
