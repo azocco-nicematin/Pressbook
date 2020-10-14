@@ -227,7 +227,7 @@ const createTableauSaisiePublihome = () => {
                 }
 
                 if (publihome.tournee) {
-                    cell11.innerHTML = "<a class=\"lienTitre\" href=\"/publihome/saisie/liste/id/"+publihome._id+"\" >Liste des tournées</a>";
+                    cell11.innerHTML = "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+publihome._id+"\" >Liste des tournées</a>";
                 }
                 else{
                     cell11.innerHTML = "Tournée non renseigné";

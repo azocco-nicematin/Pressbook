@@ -67,6 +67,7 @@ $(document).ready(function () {
                         type: 'success',
                         styling: 'bootstrap3'
                     });
+                    
 
                 },
                 error: function (data) {
@@ -390,12 +391,12 @@ const pdf = (o)=>{
         dataType : 'json',
         success: function (data) {
             console.log("bb");
-            new PNotify({
+          /*  new PNotify({
                 title: 'Pdf créé',
                 text: 'Votre saisie a été prise en compte',
                 type: 'success',
                 stylings: 'bootstrap3'
-            });
+            });*/
             window.location.href = '/download';
         }
     });

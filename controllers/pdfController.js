@@ -2,13 +2,12 @@ const pdf = require('html-pdf');
 const ejs = require('ejs');
 const moment = require('../moment-with-locales');
 
-const createPdf = async (req, res, data) => {
+const createPdf = async (req, res, data, url, orientation , name) => {
     let html;
-    const options = { filename: 'dossier.pdf', format: 'A4', orientation: 'portrait', directory: '/', type: "pdf" };
-
+    const options = { filename: name, format: 'A4', orientation: orientation, directory: '/', type: "pdf" };
     try {
-        data.date_enlevement = moment(data.date_enlevement).format('YYYY-MM-DD');
-        html = await ejs.renderFile('views/template/pdf.ejs', data)
+        
+        html = await ejs.renderFile(url, data)
         return pdf.create(html, options).toFile( async (err, result) => {
             if (err) {
                 console.log(err);

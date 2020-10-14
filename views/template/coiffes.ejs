@@ -1,0 +1,64 @@
+
+<% dataTournee.forEach(function(tournee){ %>
+<body bgcolor="white" leftmargin="20" topmargin="0" marginwidth="20" marginheight="0" text="#000000" link="#993366" vlink="#993366" alink="#993366"  >
+<div align="center">
+<table style="height: 793px;" border="0" width="1373" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<td class="textelibel" style="width: 1350px;" colspan="2" align="left">Groupe NICEMATIN<br />Si&egrave;ge social : NICE MATIN<br />214 Boulevard du Mercantour<br />06290 NICE Cedex 3<br />Tel : 04.93.18.28.38</td>
+</tr>
+
+<tr>
+<td style="width: 1100px;">
+</br></br>
+<table border="0" width="1100" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<td class="titre_imp" width="1%">&nbsp;</td>
+<td class="titre" align="center" bgcolor="#D1D0CE" style="font-size:xx-large" width="98%">PUBLIHOME A ENCARTER DANS LES JOURNAUX<br /><%= dataPublihome.date_portage_format %></td>
+<td width="1%">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="titre_imp" style="width: 1100px; font-size:x-large;" align="center">OPERATION <%= dataPublihome.titre %></td>
+</tr>
+<tr>
+<td style="width: 1350px;">
+<table border="0" width="1150" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<td class="titre_imp" width="400">No. TOURNEE :</td>
+<td class="titre_imp" width="950"><%=tournee.num_tournee%></td>
+</tr>
+<tr>
+<td class="titre_imp">TOURNEE :</td>
+<td class="titre_imp"><%= tournee.edition  %></td>
+</tr>
+<tr>
+<td class="titre">QUANTITE :</td>
+<td class="titre"><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
+</tr>
+<tr>
+<td class="titre_imp">ROUTAGE :</td>
+<td class="titre_imp"><%= tournee.routage  %></td>
+</tr>
+<tr>
+<td class="titre_imp">LIEU DEPOT :</td>
+<td class="titre_imp"><%= tournee.lieu_depot  %></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="width: 1350px;">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+<% }); %>

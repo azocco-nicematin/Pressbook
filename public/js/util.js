@@ -6,10 +6,10 @@
         };
 
         var optionSet1 = {
-          startDate: moment().subtract(1, 'days'),
-          endDate: moment().subtract(1, 'days'),
+          startDate: moment(),
+          endDate:  moment().add(30, 'days'),
           minDate: '01/01/2010',
-          maxDate: moment(),
+          maxDate: moment().add(1, 'years'),
           weekStart: 1,
           dateLimit: {
             days: 3000
@@ -25,6 +25,7 @@
             'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
             'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
             'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
+            'Les 30 prochain jours': [moment(), moment().add(30, 'days')],
             'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
             'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
           },
@@ -47,7 +48,7 @@
         };
         //$('#reportrange span').html(moment().subtract(1, 'month').add(1,'days').format('DD MMMM YYYY') + ' - ' + moment().subtract(1, 'days').add(1,'days').format('DD MMMM YYYY'));
 
-         $('#reportrange span').html(moment().subtract(1, 'days').format('DD MMMM YYYY') + ' - ' + moment().subtract(1, 'days').format('DD MMMM YYYY'));
+         $('#reportrange span').html(moment().format('DD MMMM YYYY') + ' - ' + moment().add(30, 'days').format('DD MMMM YYYY'));
         $('#reportrange').daterangepicker(optionSet1, cb);
         $('#reportrange').on('show.daterangepicker', function() {
           //console.log("show event fired");
@@ -110,8 +111,7 @@
                 },
                 {
                   extend: "print",
-                  className: "btn-sm",
-                  messageTop: '$("#sommeQuantite").text()'
+                  className: "btn-sm"
                 },
               ],
               responsive: true,

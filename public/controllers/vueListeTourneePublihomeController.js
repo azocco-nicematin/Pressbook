@@ -2,7 +2,50 @@ $(document).ready(function () {
     //creation des tableau à l'ouverture de la page avec la date de hier
     createListeTourneePublihome();
     getPublihomeInfo();
+
+
+    $("#paquets").submit(function (e) {
+
+        e.preventDefault();
+
+        let form = $(this);
+        let paquet = $("#paquet").val();
+        let id = $("#identifiantSupp").text();
+        let url = "/publihome/coiffe";
+        let type = form.attr('method');
+  // window.location.href = '/publihome/coiffe/id/'+id+'/paquet/'+paquet;
+        $.ajax({
+                type: type,
+                url: url,
+                contentType: "application/json",
+                dataType : 'json',
+                data: JSON.stringify({
+                    "id": id,
+                    "paquet" : paquet
+                }),
+                success: function (data) {
+                    //console.log(data.data);
+                   // createTableauSaisie();
+                    new PNotify({
+                        title: '',
+                        text: 'Votre saisie à été prise en compte',
+                        type: 'success',
+                        styling: 'bootstrap3'
+                    });
+                    window.location.href = '/download/coiffe';
+                },
+                error: function (data) {
+                    new PNotify({
+                        title: 'Erreur serveur',
+                        text: '',
+                        type: 'error',
+                        styling: 'bootstrap3'
+                    });
+                }
+            });
+    });
 });
+
 
 
 const createListeTourneePublihome = () => {
@@ -17,25 +60,39 @@ const createListeTourneePublihome = () => {
         dataType : 'json',
         success: (data) =>{
             console.log(data.data)
-            let dataTable = $("#tableauListeTourneePublihome").DataTable();
-            dataTable.clear().draw();
             let liste = [];
             let tournee = data.data;
             for(let i of tournee){
                 liste.push(i);
-
             }
             let quantiteTotale = 0;
             liste.forEach((value) =>{
-                    dataTable.row.add([value.num_tournee, value.nom_tournee, value.edition, value.secteur, 
-                    value.routage, value.lieu_depot, value.manager , value.net10]);
+                $("#tableauListeTourneePublihome").append("<tr><td>"+value.num_tournee+"</td><td style='text-align:left'>"+value.nom_tournee+"</td><td style='text-align:left'>"+value.edition+"</td><td>"+value.secteur+"</td><td style='text-align:left'>"+value.routage+"</td><td style='text-align:left'>"+value.lieu_depot+"</td> <td>"+value.manager+"</td><td>"+value.net10+"</td> </tr>");
                     quantiteTotale += parseInt(value.net10);
             });
-            dataTable.draw();
             $("#sommeQuantite span").append(quantiteTotale);
-           }
+            $('#tableauListeTourneePublihome').addClass(" datatable-buttons-tournee table table-striped table-bordered dt-responsive");
+            $('#tableauListeTourneePublihome').DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                  {
+                    extend: "excel",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "pdfHtml5",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "print",
+                    className: "btn-sm"
+                  },
+                ],
+                responsive: true,
+                "pageLength": 400
+              });
+        }
     });
-
 };
 
 
@@ -53,5 +110,6 @@ const getPublihomeInfo =  () =>{
             $("#nomDuSupplement").html("Info portage du "+ moment(data.data.date_portage).format('DD/MM/YYYY')+ " - "+ data.data.titre);
         }
     });
+};
 
-}
+

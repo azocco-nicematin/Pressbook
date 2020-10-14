@@ -3,9 +3,7 @@ const moment = require('../moment-with-locales');
 
 const updateFabrication = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
-        console.log(req.body);
         let id = req.body.idSupp;
-        console.log(req.body);
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
         await supplementsData.findById(id, function (err, doc) {
             if (err) {

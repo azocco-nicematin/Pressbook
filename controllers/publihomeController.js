@@ -75,10 +75,18 @@ const getPublihomeId = async (req,res) =>{
     }
 };
 
+const getPublihomeId2 = async (id) =>{
+    try {
+        let doc = await publihomeData.findById(id);
+            return doc;
+    } catch (err) {
+      console.log(err);
+    }
+};
+
 
 const updatePublihome = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
-        console.log(req.body);
         let id = req.body.idSupp;
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
         await publihomeData.findById(id, async (err, doc) => {
@@ -133,7 +141,6 @@ const deletePublihome = async (req, res) => {
 const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
 
     try {
-        console.log(req.body);
         let id = req.body.idSupp;
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
         await publihomeData.findById(id, async (err, doc) => {
@@ -166,7 +173,6 @@ const getListeTourneesPublihome = async (req,res) =>{
         let doc = await publihomeData.findById(req.body.id);
         let idTournee = doc.id_tournee;
         let listeTournee = await tourneesData.find({"_id": { "$in" : idTournee}});
-        console.log(listeTournee);
         res.status(200).json({
             status: 'success',
             data: listeTournee
@@ -178,6 +184,19 @@ const getListeTourneesPublihome = async (req,res) =>{
             status: 'fail',
             message: err
         });
+    }
+}
+
+const getListeTourneesPublihome2 = async (id) =>{
+    
+    try {
+        let doc = await publihomeData.findById(id);
+        let idTournee = doc.id_tournee;
+        let listeTournee = await tourneesData.find({"_id": { "$in" : idTournee}});
+        return listeTournee;
+         
+    } catch (err) {
+        console.log(err)
     }
 }
 
@@ -193,7 +212,6 @@ const getPublihomeListe = async (req, res) => {
                 $lt: dateFin
             }
         });
-        console.log(selectionDate);
         res.status(200).json({
             status: 'success',
             data: selectionDate
@@ -214,5 +232,8 @@ module.exports = {
     deletePublihome : deletePublihome,
     updateTournees : updateTournees,
     getListeTourneesPublihome :getListeTourneesPublihome,
-    getPublihomeListe :getPublihomeListe
+    getPublihomeListe :getPublihomeListe,
+
+    getPublihomeId2 : getPublihomeId2,
+    getListeTourneesPublihome2 :getListeTourneesPublihome2
 };

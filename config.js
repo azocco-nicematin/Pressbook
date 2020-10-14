@@ -35,14 +35,10 @@ module.exports = {
         ]
     },
     mailCredentials: {
-        host: 'smtp.gmail.com',
+        host: 'smtp-relay.gmail.com',
         port: 587,
         secure: false,
         requireTLS: true,
-        auth: {
-            user: 'azocco@nicematin.fr',
-            pass: 'lmzjexnbdrrviowl'
-        },
         tls: {
             rejectUnauthorized: false
         }

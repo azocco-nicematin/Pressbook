@@ -1,14 +1,19 @@
 $(document).ready(function () {
     //creation des tableau à l'ouverture de la page avec la date de hier
-    createRapportPressbook(moment().subtract(1, 'days').format('YYYY-MM-DD'), moment().subtract(1, 'days').format('YYYY-MM-DD'));
+    createRapportPressbook(moment().format('YYYY-MM-DD'),moment().add(30, 'days').format('YYYY-MM-DD'));
     $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
         //creation des tableau avec la date du date picker
-        createRapportPressbook(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
+        let dataTable = $("#listePressbook").DataTable();
+            dataTable.clear().draw();
+            dataTable.destroy();
+            createRapportPressbook(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
+        
     });
 });
 
 
 const createRapportPressbook = (dateDebut, dateFin) => {
+    
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -19,32 +24,45 @@ const createRapportPressbook = (dateDebut, dateFin) => {
         }),
         dataType : 'json',
         success: (data) =>{
-            let dataTable = $("#listePressbook").DataTable();
-            dataTable.clear().draw();
             let liste = [];
             let pressbook = data.data;
             for(let i of pressbook){
                 liste.push(i);
             }
             liste.forEach((value) =>{
+                let dateProdVerif = value.date_prod === null ? '' : moment(value.date_prod).format('YYYY-MM-DD');
+                let dateParutionVerif = value.parution === null ? '' : moment(value.parution).format('YYYY-MM-DD');
+                let datePortageVerif = value.date_portage === null ? '' : moment(value.date_portage).format('YYYY-MM-DD');
                 if(value.dossier_fabrication === true){
-                    dataTable.row.add([value.id, moment(value.date).format('YYYY-MM-DD HH:mm'), "<a id="+value._id+" onclick=\"pdf(this)\" ><i class=\"fa fa-file-pdf-o fa-2x\"></i></a>", value.theme, 
-                    value.suppl, moment(value.parution).format('YYYY-MM-DD'), moment(value.date_prod).format('YYYY-MM-DD'), moment(value.date_portage).format('YYYY-MM-DD'), value.edition, value.produit, value.fabr, value.papier, value.pagination,
-                    value.nb_quadri, value.tap, value.journaux, value.tirage_mini, value.origine, value.source, value.observation, value.option_reser ]);
+                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td><a id="+value._id+" onclick=\"pdf(this)\" ><i class=\"fa fa-file-pdf-o fa-2x\"></i></a></td><td>"+value.theme+"</td><td>"+value.suppl+"</td><td>"+dateParutionVerif+"</td><td>"+ dateProdVerif +"</td><td>"+ datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
                 }
                 else if(value.dossier_fabrication === false){
-                    dataTable.row.add([value.id, moment(value.date).format('YYYY-MM-DD HH:mm'), " ", value.theme, value.suppl, value.parution ? moment(value.parution).format('YYYY-MM-DD') : "", value.date_prod ?  moment(value.date_prod).format('YYYY-MM-DD') : "", value.date_portage ?  moment(value.date_portage).format('YYYY-MM-DD') : "", 
-                    value.edition, value.produit, value.fabr, value.papier, value.pagination, value.nb_quadri, value.tap, value.journaux,
-                     value.tirage_mini, value.origine, value.source, value.observation, value.option_reser ]);
+                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td></td><td>"+value.theme+"</td><td>"+value.suppl+"</td><td>"+ dateParutionVerif+"</td><td>"+  dateProdVerif +"</td><td>"+datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
                 }
-                
             });
-            dataTable.draw();
-            
+            $('#listePressbook').addClass(" table table-striped table-bordered dt-responsive");
+            $('#listePressbook').DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                  {
+                    extend: "excel",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "pdfHtml5",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "print",
+                    className: "btn-sm"
+                  },
+                ],
+                responsive: true
+              });
         }
     });
-
 }
+
 
 const pdf = (o)=>{
     let id = $(o)[0].id;
@@ -59,13 +77,12 @@ const pdf = (o)=>{
         }),
         dataType : 'json',
         success: function (data) {
-            console.log("bb");
-            new PNotify({
+           /* new PNotify({
                 title: 'Pdf créé',
                 text: 'Votre saisie a été prise en compte',
                 type: 'success',
                 stylings: 'bootstrap3'
-            });
+            });*/
             window.location.href = '/download';
         }
     });

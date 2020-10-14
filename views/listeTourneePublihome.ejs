@@ -33,7 +33,11 @@
 
   <!-- Custom Theme Style -->
   <link href="/build/css/custom.min.css" rel="stylesheet">
-
+   <!-- PNotify -->
+   <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+   <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+   <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+  
   <!-- Datatables -->
   <link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
   <link href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
@@ -80,19 +84,6 @@
             <div class="nav toggle">
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                  aria-expanded="false">
-                  <div id="reportrange"
-                    style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                    <span> Date</span> <b class="caret"></b>
-                  </div>
-                </a>
-              </li>
-            </ul>
           </nav>
         </div>
       </div>
@@ -104,6 +95,20 @@
           <div class="page-title">
             <div class="title_left">
               <h3>Liste des tournées</h3>
+            </div>
+            <div style="float: right; width: 300px;" >
+              <form id="paquets"  method="POST"   name="formPaquet">
+                <div class="col-md-6 col-sm-6  ">
+                  Nombre par paquets
+                  <input class="form-control" type="number" id="paquet" name="paquet" required="required">
+                
+                </div>
+                <div class="col-md-6 col-sm-6  offset-md-5">
+                </br>
+                  <button type="submit" class="btn btn-success validePaquet"  >Valider</button>
+              </div>
+              </form>
+             
             </div>
           </div>
           <div class="clearfix"></div>
@@ -152,9 +157,9 @@
                         <div class="col-sm-12">
                             <h3 id="sommeQuantite" style="font-weight: bold;">Totale quantité : <span></span> </h3>
                             <div class="card-box table-responsive">
-        
+        <!--class="datatable-buttons-tournee table table-striped table-bordered dt-responsive"-->
                                 <table id="tableauListeTourneePublihome"
-                                    class="datatable-buttons-tournee table table-striped table-bordered dt-responsive" cellspacing="0"
+                                   cellspacing="0"
                                     width="100%">
                                     <thead style="white-space : nowrap">
                                         <tr>
@@ -229,7 +234,10 @@
   <script src="/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
   <script src="/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
 
-
+      <!-- PNotify -->
+      <script src="/vendors/pnotify/dist/pnotify.js"></script>
+      <script src="/vendors/pnotify/dist/pnotify.buttons.js"></script>
+      <script src="/vendors/pnotify/dist/pnotify.nonblock.js"></script>
   <script src="/controllers/vueListeTourneePublihomeController.js"></script>
 
 </body>
