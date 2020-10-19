@@ -19,7 +19,7 @@ const getUserInfos = async (service) => {
             prenom_nom: res.data.names[1].displayName,
             adresseMail: res.data.emailAddresses[0].value,
             photo: res.data.photos[0].url,
-            //service: "Achat/Approvisionnement",
+            //service: "Impression",
             service: res.data.organizations[0].department,
             poste: res.data.organizations[0].title
         };
@@ -32,28 +32,25 @@ const serviceUser = async (service) => {
     try {
         let droitService;
         switch (service) {
-            case "Achat/Approvisionnement"  :
+            case "Achat/Approvisionnement" :
                 droitService = "Achat";
                 break;
-            case "Maintenance Generale" :
-            case "Mecanique" :
-                droitService = "Maintenance";
+            case "Developpement" :
+                droitService = "Communication";
                 break;
-            case "Impression"  :
+            case "Logistique" :
+                droitService = "Transport";
+                break;
+            case "Impression" :
+            case "Expeditions" : 
                 droitService = "Impression";
-                break;
-            case "Expeditions" :
-                droitService = "Expedition";
                 break;
             case "Etudes Developpement" :
             case "Systemes Exploitation" :
                 droitService = "Admin";
                 break;
-            case "Direction Technique":
-                droitService = "Direction";
-                break;
             default :
-                droitService = "nullllllllllllll";
+                droitService = "null";
         }
         return droitService;
     } catch (e) {

@@ -108,7 +108,21 @@ app.get('/tmp', async (req, res) => {
     res.cookie('info', info);
     console.log('connecté en tant que : ' + serviceConnecte);
 
-    return res.redirect('/pressbook/saisie');
+    
+
+    if (serviceConnecte === "Achat") {
+        return res.redirect('/pressbook/saisie');
+    } else if (serviceConnecte === "Communication") {
+        return res.redirect('/publihome/saisie');
+    } else if (serviceConnecte === "Transport") {
+        return res.redirect('/publihome/liste');
+    } else if (serviceConnecte === "Admin") {
+        return res.redirect('/pressbook/saisie');
+    } else if (serviceConnecte === "Impression") {
+        return res.redirect('/pressbook/liste');
+    } else {
+        return res.redirect('/pressbook/saisie');
+    }
 
 });
 
@@ -121,7 +135,10 @@ app.get('/pressbook/saisie', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('pressbook', { infoUser: droitUser });
+        (droitUser.service === "Achat" || droitUser.service === "Admin") ?
+            res.render('pressbook', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -133,6 +150,8 @@ app.get('/pressbook/liste', async (req, res) => {
 
     if (droitUser.service !== 'null') {
         return res.render('pressbook_rapport', { infoUser: droitUser });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 
 });
@@ -145,6 +164,8 @@ app.get('/pressbook/saisie/dossier/id/:id', async (req, res) => {
 
     if (droitUser.service !== 'null') {
         return res.render('formulaireFabrication', { infoUser: droitUser, id: req.params.id });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -156,7 +177,10 @@ app.get('/publihome/saisie', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('publihome', { infoUser: droitUser });
+        (droitUser.service === "Achat" || droitUser.service === "Communication" || droitUser.service === "Admin") ?
+            res.render('publihome', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -169,6 +193,8 @@ app.get('/publihome/liste', async (req, res) => {
 
     if (droitUser.service !== 'null') {
         return res.render('infolivraisonListe', { infoUser: droitUser });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -180,11 +206,10 @@ app.get('/publihome/liste/id/:id', async (req, res) => {
 
     if (droitUser.service !== 'null') {
         return res.render('listeTourneePublihome', { infoUser: droitUser, id: req.params.id });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
-
-
-
 
 
 
@@ -195,7 +220,10 @@ app.get('/configuration/elements', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('configuration_elements', { infoUser: droitUser });
+        (droitUser.service === "Admin") ?
+            res.render('configuration_elements', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -206,7 +234,10 @@ app.get('/configuration/tournees', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('configuration_tournees', { infoUser: droitUser });
+        (droitUser.service === "Admin") ?
+            res.render('configuration_tournees', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
 
@@ -217,11 +248,12 @@ app.get('/configuration/email', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        return res.render('configuration_email', { infoUser: droitUser });
+        (droitUser.service === "Admin") ?
+            res.render('configuration_email', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
     }
 });
-
-
 
 //--------------------- Pressbook requette -------------------------------------
 //saisie
@@ -274,7 +306,6 @@ app.put('/pressbook/saisie/dossier/req', async (req, res) => {
         return res.redirect('/');
     }
     await supplementsFabricationController.updateFabrication(req, res, req.cookies.info, req.cookies.service);
-
 });
 
 app.post('/pressbook/saisie/dossier/req', async (req, res) => {
@@ -312,9 +343,6 @@ app.post('/pressbook/liste/req', async (req, res) => {
     }
     await supplementsPressbookController.getSupplementsListe(req,res);
 });
-
-
-
 
 //--------------------- Publihome requette -------------------------------------
 //saisie

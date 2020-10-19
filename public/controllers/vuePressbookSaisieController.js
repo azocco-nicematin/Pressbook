@@ -390,7 +390,6 @@ const pdf = (o)=>{
         }),
         dataType : 'json',
         success: function (data) {
-            console.log("bb");
           /*  new PNotify({
                 title: 'Pdf créé',
                 text: 'Votre saisie a été prise en compte',

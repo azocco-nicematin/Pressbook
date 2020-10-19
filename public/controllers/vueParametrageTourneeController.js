@@ -48,14 +48,11 @@ const getParamTournee = async () =>{
                 const cell7 = row.insertCell(6);
                 const cell8 = row.insertCell(7);
 
-
-
-
                 cell1.style.textAlign = "center"; // edition
                 cell1.style.verticalAlign = "middle";
             
-                cell2.style.textAlign = "center"; // edition
                 cell2.style.verticalAlign = "middle";
+                cell2.style.padding = "5px";
   
                 cell3.style.textAlign = "center"; // edition
                 cell3.style.verticalAlign = "middle";
@@ -63,24 +60,14 @@ const getParamTournee = async () =>{
                 cell4.style.textAlign = "center"; // edition
                 cell4.style.verticalAlign = "middle";
 
-
-
-                cell5.style.textAlign = "center"; // edition
                 cell5.style.verticalAlign = "middle";
+                cell5.style.padding = "5px";
           
-
-                cell6.style.textAlign = "center"; // edition
                 cell6.style.verticalAlign = "middle";
+                cell6.style.padding = "5px";
        
-
                 cell7.style.textAlign = "center"; // edition
                 cell7.style.verticalAlign = "middle";
-
-
-
-
-
-
 
                 cell1.innerHTML = donnes.num_tournee;
                 cell2.innerHTML = donnes.nom_tournee;
@@ -95,7 +82,7 @@ const getParamTournee = async () =>{
                 cell8.innerHTML =
                     "<div class='border-cells' style=\"text-align: center; vertical-align: middle\">" +
                     "<span class=\"table-remove\">" +
-                    "<button type=\"button\" style='width: 30px; height : 30px; margin-top : 5px' onclick = \"deleteRowDB(this)\" class=\"btn btn-danger btn-rounded btn-sm my-0\"><b>X</b>" +
+                    "<button type=\"button\" style='width: 20px; height : 20px; margin-top : 5px; padding:0px' onclick = \"deleteRowDB(this)\" class=\"btn btn-danger btn-rounded btn-sm my-0\"><i class='fa fa-close'></i>" +
                     "</button>" +
                     "</span>" +
                     "</div>\n";
@@ -119,14 +106,10 @@ const addLine = () => {
     const cell7 = row.insertCell(6);
     const cell8 = row.insertCell(7);
 
-
-
-
     cell1.style.textAlign = "center"; // edition
     cell1.style.verticalAlign = "middle";
     cell1.contentEditable = "true";
 
-    cell2.style.textAlign = "center"; // edition
     cell2.style.verticalAlign = "middle";
     cell2.contentEditable = "true";
     
@@ -140,12 +123,10 @@ const addLine = () => {
     cell4.style.verticalAlign = "middle";
     cell4.contentEditable = "true";
 
-    cell5.style.textAlign = "center"; // edition
     cell5.style.verticalAlign = "middle";
     cell5.contentEditable = "true";
     
 
-    cell6.style.textAlign = "center"; // edition
     cell6.style.verticalAlign = "middle";
     cell6.contentEditable = "true";
 
@@ -165,7 +146,6 @@ const addLine = () => {
         "</button>" +
         "</span>" +
         "</div>\n";          
-    
     };
 
 

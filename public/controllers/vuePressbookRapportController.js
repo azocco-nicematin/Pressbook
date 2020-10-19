@@ -34,10 +34,10 @@ const createRapportPressbook = (dateDebut, dateFin) => {
                 let dateParutionVerif = value.parution === null ? '' : moment(value.parution).format('YYYY-MM-DD');
                 let datePortageVerif = value.date_portage === null ? '' : moment(value.date_portage).format('YYYY-MM-DD');
                 if(value.dossier_fabrication === true){
-                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td><a id="+value._id+" onclick=\"pdf(this)\" ><i class=\"fa fa-file-pdf-o fa-2x\"></i></a></td><td>"+value.theme+"</td><td>"+value.suppl+"</td><td>"+dateParutionVerif+"</td><td>"+ dateProdVerif +"</td><td>"+ datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
+                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td><a id="+value._id+" onclick=\"pdf(this)\" ><i class=\"fa fa-file-pdf-o fa-2x\"></i></a></td><td>"+value.theme+"</td><td class='suppl'>"+value.suppl+"</td><td>"+dateParutionVerif+"</td><td>"+ dateProdVerif +"</td><td>"+ datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
                 }
                 else if(value.dossier_fabrication === false){
-                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td></td><td>"+value.theme+"</td><td>"+value.suppl+"</td><td>"+ dateParutionVerif+"</td><td>"+  dateProdVerif +"</td><td>"+datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
+                 $("#listePressbook").append("<tr><td>"+value.id+"</td><td>"+moment(value.date).format('YYYY-MM-DD HH:mm')+"</td><td></td><td>"+value.theme+"</td><td class='suppl'>"+value.suppl+"</td><td>"+ dateParutionVerif+"</td><td>"+  dateProdVerif +"</td><td>"+datePortageVerif+"</td><td>"+value.edition+"</td><td>"+value.produit+"</td><td>"+value.fabr+"</td><td>"+value.papier+"</td><td>"+value.pagination+"</td><td>"+value.nb_quadri+"</td><td>"+value.tap+"</td><td>"+value.journaux+"</td><td>"+value.tirage_mini+"</td><td>"+value.origine+"</td><td>"+value.source+"</td><td>"+value.observation+"</td><td>"+value.option_reser+"</td></tr>");
                 }
             });
             $('#listePressbook').addClass(" table table-striped table-bordered dt-responsive");
@@ -59,6 +59,18 @@ const createRapportPressbook = (dateDebut, dateFin) => {
                 ],
                 responsive: true
               });
+              $(".suppl").each(function(index, element){
+                if($( this ).text() == "TAP" || $( this ).text() == "Autres produit"){
+                    $( element ).css( "backgroundColor", "#ffe6ff" );
+                }
+                else if($( this ).text() == "Memostick"){
+                    $( element ).css( "backgroundColor", "#ffffb3" );
+                }
+                else if($( this ).text() == "Supp"){
+                    $( element ).css( "backgroundColor", "#ccffcc" );
+                }
+              })
+
         }
     });
 }
