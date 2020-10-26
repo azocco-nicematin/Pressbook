@@ -32,6 +32,7 @@ const serviceUser = async (service) => {
     try {
         let droitService;
         switch (service) {
+            case "Maintenance Generale" :
             case "Achat/Approvisionnement" :
                 droitService = "Achat";
                 break;

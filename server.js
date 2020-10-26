@@ -255,6 +255,14 @@ app.get('/configuration/email', async (req, res) => {
     }
 });
 
+app.get('/deconnexion', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    res.clearCookie('jwt');
+    return res.redirect('/');
+});
+
 //--------------------- Pressbook requette -------------------------------------
 //saisie
 app.post('/pressbook/saisie/req', async (req, res) => {

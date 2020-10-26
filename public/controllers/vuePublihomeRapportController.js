@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
     //creation des tableau à l'ouverture de la page avec la date de hier
-    createListeRapportPublihome(moment().subtract(1, 'days').format('YYYY-MM-DD'), moment().subtract(1, 'days').format('YYYY-MM-DD'));
+    createListeRapportPublihome(moment().format('YYYY-MM-DD'),moment().add(30, 'days').format('YYYY-MM-DD'));
     $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
         //creation des tableau avec la date du date picker
         createListeRapportPublihome(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));

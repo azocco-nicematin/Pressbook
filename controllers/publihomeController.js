@@ -1,7 +1,9 @@
 const publihomeData = require('../models/publihomeData');
 const tourneesData = require('../models/tourneesData');
+const quantiteTourneesData = require('../models/quantiteTourneesData');
 const moment = require('../moment-with-locales');
 const mongoose = require('mongoose');
+const { off } = require('../server');
 
 
 const createPublihome = async (req, res, infosConnectedUser, serviceUsers) => {
@@ -173,6 +175,15 @@ const getListeTourneesPublihome = async (req,res) =>{
         let doc = await publihomeData.findById(req.body.id);
         let idTournee = doc.id_tournee;
         let listeTournee = await tourneesData.find({"_id": { "$in" : idTournee}});
+        let jour = moment(doc.date_portage).format("dddd").toUpperCase();
+        for(tournee of listeTournee){
+            let quantite = await quantiteTourneesData.findOne({"CODTOUR" : tournee.num_tournee, "JOUR" : jour});
+            if(quantite !== null){
+            tournee.net10 = quantite.NBEXP ;
+            }
+           // console.log(quantite.NBEXP);
+        }
+        console.log(listeTournee);
         res.status(200).json({
             status: 'success',
             data: listeTournee

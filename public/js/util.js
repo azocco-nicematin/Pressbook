@@ -25,7 +25,7 @@
             'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
             'Les 7 derniers jours': [moment().subtract(6, 'days'), moment()],
             'Les 30 derniers jours': [moment().subtract(29, 'days'), moment()],
-            'Les 30 prochain jours': [moment(), moment().add(30, 'days')],
+            'Les 30 prochains jours': [moment(), moment().add(30, 'days')],
             'Ce mois-ci': [moment().startOf('month'), moment().endOf('month')],
             'Le mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
           },
