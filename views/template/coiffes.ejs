@@ -24,7 +24,7 @@
 </tr>
 
 <tr>
-<td class="titre_imp" style="width: 1100px; font-size:x-large;" align="center">OPERATION <%= dataPublihome.titre %></td>
+<td class="titre_imp" style="font-weight: bold; width: 1100px; font-size:x-large; text-align: center;" >OPERATION <%= dataPublihome.titre %></td>
 </tr>
 <tr>
 <td style="width: 1350px;">
@@ -32,23 +32,23 @@
 <tbody>
 <tr>
 <td class="titre_imp" width="400">No. TOURNEE :</td>
-<td class="titre_imp" width="950"><%=tournee.num_tournee%></td>
+<td class="titre_imp" style="font-weight: bold;" width="950"><%=tournee.num_tournee%></td>
 </tr>
 <tr>
 <td class="titre_imp">TOURNEE :</td>
-<td class="titre_imp"><%= tournee.edition  %></td>
+<td class="titre_imp" style="font-weight: bold;"><%= tournee.edition  %></td>
 </tr>
 <tr>
 <td class="titre">QUANTITE :</td>
-<td class="titre"><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
+<td class="titre" style="font-weight: bold;" ><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
 </tr>
 <tr>
 <td class="titre_imp">ROUTAGE :</td>
-<td class="titre_imp"><%= tournee.routage  %></td>
+<td class="titre_imp" style="font-weight: bold;"><%= tournee.routage  %></td>
 </tr>
 <tr>
 <td class="titre_imp">LIEU DEPOT :</td>
-<td class="titre_imp"><%= tournee.lieu_depot  %></td>
+<td class="titre_imp" style="font-weight: bold;"><%= tournee.lieu_depot  %></td>
 </tr>
 </tbody>
 </table>

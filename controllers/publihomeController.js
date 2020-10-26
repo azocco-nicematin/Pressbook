@@ -204,6 +204,14 @@ const getListeTourneesPublihome2 = async (id) =>{
         let doc = await publihomeData.findById(id);
         let idTournee = doc.id_tournee;
         let listeTournee = await tourneesData.find({"_id": { "$in" : idTournee}});
+        let jour = moment(doc.date_portage).format("dddd").toUpperCase();
+        for(tournee of listeTournee){
+            let quantite = await quantiteTourneesData.findOne({"CODTOUR" : tournee.num_tournee, "JOUR" : jour});
+            if(quantite !== null){
+            tournee.net10 = quantite.NBEXP ;
+            }
+           // console.log(quantite.NBEXP);
+        }
         return listeTournee;
          
     } catch (err) {
