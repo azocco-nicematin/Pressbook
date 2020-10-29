@@ -141,7 +141,6 @@ const deletePublihome = async (req, res) => {
 
 
 const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
-
     try {
         let id = req.body.idSupp;
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
@@ -165,7 +164,6 @@ const updateTournees = async (req,res, infosConnectedUser, serviceUsers ) => {
             message: err
         });
     }
-
 };
 
 

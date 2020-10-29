@@ -230,7 +230,7 @@ const createTableauSaisiePublihome = () => {
                     cell11.innerHTML = "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+publihome._id+"\" >Liste des tournées</a>";
                 }
                 else{
-                    cell11.innerHTML = "Tournée non renseigné";
+                    cell11.innerHTML = "Tournée non renseignées";
                 }
 
 
@@ -346,7 +346,6 @@ const createFormTourneesTotales = () => {
     });
 }
 
-
 const verifyNotAll = (o) => {
     let edition = $(o).attr('class');
     if ($(o).is(':checked')) {
@@ -366,15 +365,12 @@ const getTourneesEditions = (o) => {
             data.data.forEach(element => {
                 let editionFormat = element.nom.replace(/ /g, "");
                 $('#' + editionFormat).attr("style", "display:none");
-
             });
-
             const edition = $(o).html();
             let editionFormat = edition.replace(/ /g, "");
             $('#' + editionFormat).attr("style", "display:contents");
         }
     });
-
 }
 
 

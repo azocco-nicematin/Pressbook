@@ -106,18 +106,14 @@
                 padding: 5px 10px;
                 list-style-type: none;
                 text-align: left;
-            }
-        
+            }  
             .case-equipement {
                 text-align: left;
             }
-        
-        
             .table-bordered>tbody>tr>td {
                 vertical-align: middle;
                 text-align: center
             }
-        
             .table-bordered>tbody>tr>td>.description {
                 text-align: left;
                 min-width: 500px;
@@ -142,12 +138,9 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12">
+                          
                          <div class="row">
-                          <div class="col-md-3 col-sm-3 ">
-                          <div class="title_left">
-                            <h3 id="sommeQuantite" style="font-weight: bold;">Totale quantité : <span></span> </h3>
-                          </div>
-                          </div>
+                          <% if (infoUser.service === "Transport" || infoUser.service === "Admin") {%>
                           <div class="col-md-9 col-sm-9">
                           <div style=" width: 300px;" >
                             <form id="paquets"  method="POST"   name="formPaquet">
@@ -164,7 +157,14 @@
                            
                           </div>
                           </div>
+                          <%}%>
+                          <div class="col-md-3 col-sm-3 ">
+                            <div class="title_left" style="float: right">
+                              <h3 id="sommeQuantite" style="font-weight: bold;">Totale quantité : <span></span> </h3>
+                            </div>
+                            </div>
                          </div>
+                        
                           
                             
                            

@@ -26,7 +26,7 @@ const serverHelpers = require('./helpers/serverHelpers');
 const cookieParser = require('cookie-parser');
 
 const jwt = require('jsonwebtoken');
- 
+
 
 // mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/mydb
 mongoose.connect(CONFIG.dbConfig, {
@@ -328,12 +328,13 @@ app.post('/pressbook/saisie/pdf', async (req, res) => {
         return res.redirect('/');
     }
     let data = await supplementsPressbookController.getSupplementId2(req);
-    data.date_enlevement_format = moment(data.date_enlevement, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    data.parution_format = moment(data.parution, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    data.date_prod_format = moment(data.date_prod, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    data.date_dispo_format = moment(data.date_dispo, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    data.date_reception_format = moment(data.date_reception, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    data.date_prod_format = moment(data.date_prod, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
+    data.date_enlevement_format = data.date_enlevement ? moment(data.date_enlevement, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
+    console.log(data.date_enlevement_format);
+    data.parution_format = data.parution ? moment(data.parution, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
+    data.date_prod_format = data.date_prod ? moment(data.date_prod, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY'): "";
+    data.date_dispo_format = data.date_dispo ? moment(data.date_dispo, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
+    data.date_reception_format = data.date_reception ? moment(data.date_reception, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
+    data.date_prod_format = data.date_prod ? moment(data.date_prod, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
     await pdfController.createPdf(req, res, data , 'views/template/pdf.ejs', 'portrait', 'dossier.pdf');
 });
 
