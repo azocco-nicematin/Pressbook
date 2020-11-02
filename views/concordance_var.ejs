@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <script>
+        window.onunload = function () { };
+        if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
+            location.reload();
+        }
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Pressbook </title>
+
+    <!-- Bootstrap -->
+    <link rel="icon" type="image/png" href="/images/nm2.png" />
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/build/css/custom.min.css" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+</head>
+<style>
+    .x_title h2 {
+        color: white;
+    }
+
+    .x_title {
+        background: #2A3F54;
+    }
+</style>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <%- include('include/logoNm') %>
+                <!-- menu profile quick info -->
+                <%- include('include/bloc_profil') %>
+                <div class="clearfix"></div>
+
+
+                <!-- /menu profile quick info -->
+
+
+                <%- include('include/menu_gauche') %>
+                <!-- /menu footer buttons -->
+
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Liste des tournées</h3>
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <style>
+                    .liste-equipement {
+                        padding: 5px 10px;
+                        list-style-type: none;
+                        text-align: left;
+                    }
+                    .case-equipement {
+                        text-align: left;
+                    }
+                    .table-bordered>tbody>tr>td {
+                        vertical-align: middle;
+                        text-align: center
+                    }
+                    .table-bordered>tbody>tr>td>.description {
+                        text-align: left;
+                        min-width: 500px;
+                    }
+                </style>
+
+
+
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Fiche concordance VAR </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+
+
+
+
+
+                                    <div class="card-box table-responsive">
+                                        <!--class="datatable-buttons-tournee table table-striped table-bordered dt-responsive"-->
+                                        <table id="tableauListeConcordanceVar"
+                                               cellspacing="0"
+                                               width="100%">
+                                            <thead style="white-space : nowrap">
+                                            <tr>
+                                                <th style="text-align: center; vertical-align: middle">N° Tournée</th>
+                                                <th style="text-align: center; vertical-align: middle">Nom tournée</th>
+                                                <th style="text-align: center; vertical-align: middle">Edition</th>
+                                                <th style="text-align: center; vertical-align: middle">Secteur</th>
+                                                <th style="text-align: center; vertical-align: middle">Routage</th>
+                                                <th style="text-align: center; vertical-align: middle">Lieu dépot</th>
+                                                <th style="text-align: center; vertical-align: middle">Manager</th>
+                                                <th style="text-align: center; vertical-align: middle">Net + 10%</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- /page content -->
+
+
+    <!-- footer content -->
+    <%- include('include/footer') %>
+    <!-- /footer content -->
+
+</div>
+</div>
+
+<!-- jQuery -->
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DateJS -->
+<script src="/vendors/DateJS/build/date.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/moment/locale/fr.js"></script>
+<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/build/js/custom.min.js"></script>
+
+<!-- bootstrap-daterangepicker util -->
+<script src="/js/util.js"></script>
+<!-- Datatables -->
+<script src="/vendors/jszip/dist/jszip.min.js"></script>
+<script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
+<script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+<!-- <script src="/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>-->
+
+<!-- PNotify -->
+<script src="/vendors/pnotify/dist/pnotify.js"></script>
+<script src="/vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+
+<script src="/controllers/vueConcordanceVarController.js"></script>
+
+</body>
+
+</html>

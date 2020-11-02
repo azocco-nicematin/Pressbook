@@ -2,8 +2,6 @@ const publihomeData = require('../models/publihomeData');
 const tourneesData = require('../models/tourneesData');
 const quantiteTourneesData = require('../models/quantiteTourneesData');
 const moment = require('../moment-with-locales');
-const mongoose = require('mongoose');
-const { off } = require('../server');
 
 
 const createPublihome = async (req, res, infosConnectedUser, serviceUsers) => {

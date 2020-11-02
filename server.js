@@ -16,6 +16,7 @@ const parametrageElementsController = require('./controllers/parametrageElements
 const parametrageEmailController = require('./controllers/parametrageEmailController');
 const supplementsFabricationController = require('./controllers/supplementsFabricationController');
 const publihomeController = require('./controllers/publihomeController');
+const concordanceController = require('./controllers/concordanceController');
 const emailController = require('./controllers/emailController');
 const pdfController = require('./controllers/pdfController');
 const parametrageTourneesController = require('./controllers/parametrageTourneesController');
@@ -211,6 +212,30 @@ app.get('/publihome/liste/id/:id', async (req, res) => {
     }
 });
 
+
+app.get('/concordance/am', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
+    if (droitUser.service !== 'null') {
+        return res.render('concordance_am', { infoUser: droitUser });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
+    }
+});
+
+app.get('/concordance/var', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
+    if (droitUser.service !== 'null') {
+        return res.render('concordance_var', { infoUser: droitUser });
+    } else {
+        res.render('error/page_404', {infoUser: droitUser});
+    }
+});
 
 
 app.get('/configuration/elements', async (req, res) => {
@@ -422,6 +447,15 @@ app.get('/download/coiffe', async (req, res) => {
         return res.redirect('/');
     }
     res.download('./coiffes.pdf'); // Set disposition and send it.
+});
+
+
+//---------------------- concordance requette
+app.post('/concordance/req', async (req, res) => {
+    if (!req.cookies.jwt) {
+        return res.redirect('/');
+    }
+    await concordanceController.getListeConcordance(req,res);
 });
 
 

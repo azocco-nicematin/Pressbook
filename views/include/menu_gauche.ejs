@@ -24,9 +24,22 @@
                 </ul>
             </li>
             <% } %>
+
+
         </ul>
     </div>
 
+    <div class="menu_section">
+        <h3>Fichier Concordance</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-sticky-note-o"></i>Zone <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/concordance/am">AM</a></li>
+                    <li><a href="/concordance/var">VAR</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
     <% if ( infoUser.service === "Admin") {%>
     <div class="menu_section">
         <h3>Paramétrage</h3>
