@@ -1,8 +1,10 @@
-
 $(document).ready(function () {
     //creation des tableau à l'ouverture de la page avec la date de hier
     createListeRapportPublihome(moment().format('YYYY-MM-DD'),moment().add(30, 'days').format('YYYY-MM-DD'));
     $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+        let dataTable = $("#listePublihome").DataTable();
+        dataTable.clear().draw();
+        dataTable.destroy();
         //creation des tableau avec la date du date picker
         createListeRapportPublihome(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'));
     });
@@ -20,22 +22,34 @@ const createListeRapportPublihome = (dateDebut, dateFin) => {
         dataType : 'json',
         success: (data) =>{
             console.log(data.data)
-            let dataTable = $("#listePublihome").DataTable();
-            dataTable.clear().draw();
             let liste = [];
             let publihome = data.data;
             for(let i of publihome){
                 liste.push(i);
             }
             liste.forEach((value) =>{
-                    dataTable.row.add([value.idPublihome, moment(value.date).format('YYYY-MM-DD'), value.titre, value.type, 
-                    value.quantite_totale, moment(value.date_portage).format('YYYY-MM-DD'), 
-                    value.poid , value.nombres_pages, value.conditionnement, value.commentaire, 
-                    value.tournee ? "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+value._id+"\" >Liste des tournées</a>" : "Tournées non renseignées", 
-                    value.etat]);    
+                let tournees = value.tournee ? "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+value._id+"\" >Liste des tournées</a>" : "Tournées non renseignées"
+                $("#listePublihome").append("<tr><td>"+value.idPublihome+"</td><td>"+moment(value.date).format('YYYY-MM-DD')+"</td><td>"+value.titre+"</td><td>"+value.type+"</td><td>"+value.quantite_totale+"</td><td>"+moment(value.date_portage).format('YYYY-MM-DD')+"</td><td>"+value.poid+"</td><td>"+value.nombres_pages+"</td><td>"+value.conditionnement+"</td><td>"+value.commentaire+"</td><td>"+tournees+"</td><td>"+value.etat+"</td></tr>")
             });
-            dataTable.draw();
+            $("#listePublihome").addClass(" table table-striped table-bordered dt-responsive");
+            $('#listePublihome').DataTable({
+                dom: "Bfrtip",
+                buttons: [
+                  {
+                    extend: "excel",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "pdfHtml5",
+                    className: "btn-sm"
+                  },
+                  {
+                    extend: "print",
+                    className: "btn-sm"
+                  },
+                ],
+                responsive: true
+              });
            }
     });
-
 };

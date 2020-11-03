@@ -71,7 +71,7 @@ const createListeTourneePublihome = () => {
                     quantiteTotale += parseInt(value.net10);
             });
             $("#sommeQuantite span").append(quantiteTotale);
-            $('#tableauListeTourneePublihome').addClass(" datatable-buttons-tournee table table-striped table-bordered dt-responsive");
+            $('#tableauListeTourneePublihome').addClass("datatable-buttons-tournee table table-striped table-bordered dt-responsive");
             $('#tableauListeTourneePublihome').DataTable({
                 dom: "Bfrtip",
                 buttons: [

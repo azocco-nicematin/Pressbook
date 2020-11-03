@@ -194,12 +194,10 @@ const createTableauSaisiePublihome = () => {
 
                 if (publihome.type) {
                     cell4.innerHTML = publihome.type;
-
                 }
 
                 if (publihome.quantite_totale) {
                     cell5.innerHTML = publihome.quantite_totale;
-
                 }
 
                 if (publihome.date_portage) {
@@ -209,7 +207,6 @@ const createTableauSaisiePublihome = () => {
 
                 if (publihome.poid) {
                     cell7.innerHTML = publihome.poid;
-
                 }
 
                 if (publihome.nombres_pages) {
@@ -220,7 +217,6 @@ const createTableauSaisiePublihome = () => {
                 if (publihome.conditionnement) {
                     cell9.innerHTML = publihome.conditionnement;
                 }
-
 
                 if (publihome.commentaire) {
                     cell10.innerHTML = publihome.commentaire;

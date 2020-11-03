@@ -18,8 +18,8 @@ module.exports = {
     cadre: cadre,
 //    dbConfig: "mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/pressbook?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false",
 //dbConfig: "mongodb://sdp:sDp1dB2020Kl0gY@cocofesses:27017/suivi_de_prod?authSource=suivi_de_prod&readPreference=primary&appname=MongoDB%20Compass&ssl=false",  
-//dbConfig: "mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/pressbook?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false",
-    dbConfig: "mongodb://localhost:27017/pressbook?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false",
+dbConfig: "mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/pressbook?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false",
+ //   dbConfig: "mongodb://localhost:27017/pressbook?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false",
     oauth2Credentials: {
         client_id: "73978724420-3hpd2tljeepqfu1e125ir9ibp775ohj5.apps.googleusercontent.com",
         project_id: "key-reference-273714", // The name of your project
