@@ -5,6 +5,7 @@ $(document).ready(function () {
 });
 
 const createListeConcordanceVar = () => {
+    $("#loadingConcordanceVar").html('<img src="/images/loading.gif" />');
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -43,6 +44,7 @@ const createListeConcordanceVar = () => {
                 responsive: true,
                 "pageLength": 400
             });
+            $("#loadingConcordanceVar").html('');
         }
     });
 };

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 
 const createRapportPressbook = (dateDebut, dateFin) => {
-    
+    $("#loadingRapportPressbook").html('<img src="/images/loading.gif" />');
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -69,8 +69,8 @@ const createRapportPressbook = (dateDebut, dateFin) => {
                 else if($( this ).text() == "Supp"){
                     $( element ).css( "backgroundColor", "#ccffcc" );
                 }
-              })
-
+              });
+              $("#loadingRapportPressbook").html('');
         }
     });
 }

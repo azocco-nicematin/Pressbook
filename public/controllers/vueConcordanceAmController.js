@@ -5,6 +5,7 @@ $(document).ready(function () {
 });
 
     const createListeConcordanceAm = () => {
+        $("#loadingConcordanceAm").html('<img src="/images/loading.gif" />');
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -43,6 +44,8 @@ $(document).ready(function () {
                 responsive: true,
                 "pageLength": 400
             });
+            $("#loadingConcordanceAm").html('');
         }
     });
+
 };

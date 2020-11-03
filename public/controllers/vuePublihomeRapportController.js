@@ -11,6 +11,7 @@ $(document).ready(function () {
 });
 
 const createListeRapportPublihome = (dateDebut, dateFin) => {
+    $("#loadingRapportPublihome").html('<img src="/images/loading.gif" />');
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -50,6 +51,8 @@ const createListeRapportPublihome = (dateDebut, dateFin) => {
                 ],
                 responsive: true
               });
+              $("#loadingRapportPublihome").html('');
            }
     });
+   
 };
