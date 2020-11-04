@@ -1,0 +1,240 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 2111
+>>
+stream
+0.5670000000000001 w
+0 G
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+28.3464566929133888 813.5435433070865656 Td
+(<body bgcolor="white" leftmargin="20" topmargin="0" marginwidth="20" marginheight="0" text="#000000" link="#993366" vlink="#993366" alink="#993366"  > <div align="center"><table style="height: 793px;" border="0" width="1373" cellspacing="0" cellpadding="10"><tbody> <tr><td class="textelibel" style="width: 1350px;" colspan="2" align="left">Groupe NICEMATIN<br />Si&egrave;ge social : NICE MATIN<br />214 Boulevard du Mercantour<br />06290 NICE Cedex 3<br />Tel : 04.93.18.28.38</td></tr><tr> <td style="width: 1100px;"></br></br><table border="0" width="1100" cellspacing="0" cellpadding="10"> <tbody><tr><td class="titre_imp" width="1%">&nbsp;</td><td class="titre" align="center" bgcolor="#D1D0CE" style="font-size:xx-large" width="98%">PUBLIHOME A ENCARTER DANS LES JOURNAUX<br /><%= dataPublihome.date_portage_format %></td><td width="1%">&nbsp;</td></tr> </tbody></table> </td> </tr> <tr><td class="titre_imp" style="font-weight: bold; width: 1100px; font-size:x-large; text-align: center;" >OPERATION <%= dataPublihome.titre %></td></tr> <tr> <td style="width: 1350px;"> <table border="0" width="1150" cellspacing="0" cellpadding="10"> <tbody><tr><td class="titre_imp" width="400">No. TOURNEE :</td> <td class="titre_imp" style="font-weight: bold;" width="950"><%=tournee.num_tournee%></td> </tr> <tr> <td class="titre_imp">TOURNEE :</td> <td class="titre_imp" style="font-weight: bold;"><%= tournee.edition  %></td> </tr> <tr> <td class="titre">QUANTITE :</td><td class="titre" style="font-weight: bold;" ><%= tournee.net10%paquet  %> + <%= Math.floor\(tournee.net10/paquet\)  %> paquets \(<%= paquet %>\)</td> </tr><tr> <td class="titre_imp">ROUTAGE :</td> <td class="titre_imp" style="font-weight: bold;"><%= tournee.routage  %></td> </tr> <tr> <td class="titre_imp">LIEU DEPOT :</td> <td class="titre_imp" style="font-weight: bold;"><%= tournee.lieu_depot  %></td> </tr> </tbody> </table> </td> </tr> <tr> <td style="width: 1350px;">&nbsp;</td> </tr> </tbody> </table> </div> </body>) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+/F4 8 0 R
+/F5 9 0 R
+/F6 10 0 R
+/F7 11 0 R
+/F8 12 0 R
+/F9 13 0 R
+/F10 14 0 R
+/F11 15 0 R
+/F12 16 0 R
+/F13 17 0 R
+/F14 18 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+19 0 obj
+<<
+/Producer (jsPDF 2.1.1)
+/CreationDate (D:20201104122701+01'00')
+>>
+endobj
+20 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000002315 00000 n 
+0000004132 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000002372 00000 n 
+0000002497 00000 n 
+0000002627 00000 n 
+0000002760 00000 n 
+0000002897 00000 n 
+0000003020 00000 n 
+0000003149 00000 n 
+0000003281 00000 n 
+0000003417 00000 n 
+0000003545 00000 n 
+0000003672 00000 n 
+0000003801 00000 n 
+0000003934 00000 n 
+0000004036 00000 n 
+0000004380 00000 n 
+0000004466 00000 n 
+trailer
+<<
+/Size 21
+/Root 20 0 R
+/Info 19 0 R
+/ID [ <5F49DDAC5A38B159B0A7EEEBBF273A0E> <5F49DDAC5A38B159B0A7EEEBBF273A0E> ]
+>>
+startxref
+4570
+%%EOF
