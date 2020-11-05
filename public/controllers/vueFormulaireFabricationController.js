@@ -48,7 +48,6 @@ $(document).ready(function () {
 const remplirForm = () =>{
 
     let id = $("#identifiantSupp").text();
-    console.log(id)
     $.ajax({
         type: "POST",
         contentType : "application/json",
@@ -58,7 +57,6 @@ const remplirForm = () =>{
         }),
         dataType : 'json',
         success:  (data) => {
-                console.log(data.data);
                 if(data.data.date_dispo){
                     $("#dateDispo").val(moment(data.data.date_dispo).format('YYYY-MM-DD'))
                  } 

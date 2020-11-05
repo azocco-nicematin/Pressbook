@@ -16,7 +16,6 @@ const createPdf = async (req, res, data, url, orientation , name) => {
                 status: 'success'
             });
         });
-        //console.log(pdfCreated)
     } catch (e) {
         res.end('An error occurred');
         console.log(e);

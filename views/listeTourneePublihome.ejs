@@ -144,12 +144,15 @@
                           <div class="col-md-9 col-sm-9">
                           <div style=" width: 300px;" >
                             <form id="paquets"  method="POST"   name="formPaquet">
-                              <div class="col-md-6 col-sm-6  ">
-                                Nombre par paquets
-                                <input class="form-control" type="number" id="paquet" name="paquet" required="required">
-                              
+                              <div class="col-md-9 col-sm-9  ">
+                                Conditionnement
+                                <input class="form-control" type="number" min="0" id="paquet" name="paquet" required="required">
+                 
+                                  <input type="radio" id="net" checked="checked" value="net"  name="iCheck"> <label for="net" style="font-weight: 100;">Net</label>
+
+                                  <input type="radio" style="margin-left: 15px;" id="net10"  value="net10"  name="iCheck"> <label for="net10" style="font-weight: 100;">Net + 10%</label> 
                               </div>
-                              <div class="col-md-6 col-sm-6  offset-md-5">
+                              <div class="col-md-3 col-sm-3  offset-md-5">
                               </br>
                                 <button type="submit" class="btn btn-success validePaquet"  >Valider</button>
                             </div>
@@ -160,10 +163,12 @@
                           <%}%>
                           <div class="col-md-3 col-sm-3 ">
                             <div class="title_left" style="float: right">
-                              <h3 id="sommeQuantite" style="font-weight: bold;">Totale quantité : <span></span> </h3>
+                              <h3 id="sommeQuantiteNet" style="font-weight: bold; text-align: right;">Totale Net : <span></span> </h3>
+                              <h3 id="sommeQuantiteNet10" style="font-weight: bold; text-align: right;">Totale Net+10% : <span></span> </h3>
                             </div>
                             </div>
                          </div>
+                         <br/>
                         
                           
                             
@@ -182,6 +187,7 @@
                                             <th style="text-align: center; vertical-align: middle">Routage</th>
                                             <th style="text-align: center; vertical-align: middle">Lieu dépot</th>
                                             <th style="text-align: center; vertical-align: middle">Manager</th>
+                                            <th style="text-align: center; vertical-align: middle">Net</th>
                                             <th style="text-align: center; vertical-align: middle">Net + 10%</th>
                                         </tr>
                                     </thead>

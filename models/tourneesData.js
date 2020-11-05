@@ -11,6 +11,7 @@ const tourneeDataSchema = new Schema({
     routage :{type: String},
     lieu_depot :{type: String},
     manager :{type: String},
+    net :{type: String},
     net10 :{type: String},
     
     login: {type: String},

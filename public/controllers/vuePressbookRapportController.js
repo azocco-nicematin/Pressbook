@@ -78,7 +78,6 @@ const createRapportPressbook = (dateDebut, dateFin) => {
 
 const pdf = (o)=>{
     let id = $(o)[0].id;
-    console.log(id);
 
     $.ajax({
         type: "POST",

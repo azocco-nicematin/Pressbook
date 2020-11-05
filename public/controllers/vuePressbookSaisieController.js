@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function () {
     getSuppl();
     getEdition();
@@ -379,7 +376,6 @@ const createTableauSaisie = () => {
 
 const pdf = (o)=>{
     let id = $(o)[0].id;
-    console.log(id);
 
     $.ajax({
         type: "POST",
@@ -415,7 +411,6 @@ const remplirForm = (o) =>{
         }),
         dataType : 'json',
         success: function (data) {
-                console.log(data.data);
                 $("#suppl").val(data.data.suppl);
                 $("#parution").val(moment(data.data.parution).format('YYYY-MM-DD'));
                 $("#dateProd").val(moment(data.data.date_prod).format('YYYY-MM-DD'));

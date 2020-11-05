@@ -40,7 +40,12 @@
 </tr>
 <tr>
 <td class="titre">QUANTITE :</td>
-<td class="titre" style="font-weight: bold;" ><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
+<% if( typeQuantite === "net"){ %>
+<td class="titre" style="font-weight: bold;" ><%= tournee.net%paquet  %> + <%= Math.floor(tournee.net/paquet)  %> paquets (<%= paquet %>)</td>
+<% } %>
+<% if( typeQuantite === "net10"){ %>
+    <td class="titre" style="font-weight: bold;" ><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
+    <% } %>
 </tr>
 <tr>
 <td class="titre_imp">ROUTAGE :</td>
@@ -61,5 +66,5 @@
 </table>
 </div>
 </body>
-<div style="page-break-before:always">&nbsp;</div> 
+<div style="page-break-before:always"></div> 
 <% }); %>

@@ -175,11 +175,15 @@ const getListeTourneesPublihome = async (req,res) =>{
         for(tournee of listeTournee){
             let quantite = await quantiteTourneesData.findOne({"CODTOUR" : tournee.num_tournee, "JOUR" : jour});
             if(quantite !== null){
-            tournee.net10 = quantite.NBEXP ;
+                tournee.net = quantite.NBEXP ;
+                tournee.net10 = Math.round((quantite.NBEXP)*1.1) ;
+            }
+            else{
+                tournee.net = 0 ;
+                tournee.net10 = 0 ;
             }
            // console.log(quantite.NBEXP);
         }
-        console.log(listeTournee);
         res.status(200).json({
             status: 'success',
             data: listeTournee
@@ -204,7 +208,12 @@ const getListeTourneesPublihome2 = async (id) =>{
         for(tournee of listeTournee){
             let quantite = await quantiteTourneesData.findOne({"CODTOUR" : tournee.num_tournee, "JOUR" : jour});
             if(quantite !== null){
-            tournee.net10 = quantite.NBEXP ;
+                tournee.net = quantite.NBEXP ;
+                tournee.net10 = Math.round((quantite.NBEXP)*1.1) ;
+            }
+            else{
+                tournee.net = 0 ;
+                tournee.net10 = 0 ;
             }
            // console.log(quantite.NBEXP);
         }

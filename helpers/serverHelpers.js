@@ -19,8 +19,8 @@ const getUserInfos = async (service) => {
             prenom_nom: res.data.names[1].displayName,
             adresseMail: res.data.emailAddresses[0].value,
             photo: res.data.photos[0].url,
-            service: "Logistique",
-            //service: res.data.organizations[0].department,
+            //service: "Logistique",
+            service: res.data.organizations[0].department,
             poste: res.data.organizations[0].title
         };
     } catch (e) {

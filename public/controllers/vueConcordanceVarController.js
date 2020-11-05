@@ -15,14 +15,13 @@ const createListeConcordanceVar = () => {
         }),
         dataType : 'json',
         success: (data) =>{
-            console.log(data.data)
             let liste = [];
             let tournee = data.data;
             for(let i of tournee){
                 liste.push(i);
             }
             liste.forEach((value) =>{
-                $("#tableauListeConcordanceVar").append("<tr><td>"+value.num_tournee+"</td><td style='text-align:left'>"+value.nom_tournee+"</td><td style='text-align:left'>"+value.edition+"</td><td>"+value.secteur+"</td><td style='text-align:left'>"+value.routage+"</td><td style='text-align:left'>"+value.lieu_depot+"</td> <td>"+value.manager+"</td><td>"+value.net10+"</td> </tr>");
+                $("#tableauListeConcordanceVar").append("<tr><td>"+value.num_tournee+"</td><td style='text-align:left'>"+value.nom_tournee+"</td><td style='text-align:left'>"+value.edition+"</td><td>"+value.secteur+"</td><td style='text-align:left'>"+value.routage+"</td><td style='text-align:left'>"+value.lieu_depot+"</td> <td>"+value.manager+"</td><td>"+value.net+"</td> </tr>");
             });
             $('#tableauListeConcordanceVar').addClass(" datatable-buttons-tournee table table-striped table-bordered dt-responsive");
             $('#tableauListeConcordanceVar').DataTable({

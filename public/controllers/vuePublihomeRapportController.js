@@ -22,7 +22,6 @@ const createListeRapportPublihome = (dateDebut, dateFin) => {
         }),
         dataType : 'json',
         success: (data) =>{
-            console.log(data.data)
             let liste = [];
             let publihome = data.data;
             for(let i of publihome){

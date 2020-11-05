@@ -23,11 +23,12 @@ const getListeConcordance = async (req,res) =>{
         for(tournee of listeTournee){
             let quantite = await quantiteTourneesData.findOne({"CODTOUR" : tournee.num_tournee}).sort({"NBEXP":-1}).limit(1);
             if(quantite !== null){
-                tournee.net10 = quantite.NBEXP ;
+                tournee.net = quantite.NBEXP ;
+            }else{
+                tournee.net = 0;
             }
             // console.log(quantite.NBEXP);
         }
-        console.log(listeTournee);
         res.status(200).json({
             status: 'success',
             data: listeTournee

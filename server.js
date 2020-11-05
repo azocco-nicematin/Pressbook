@@ -354,7 +354,6 @@ app.post('/pressbook/saisie/pdf', async (req, res) => {
     }
     let data = await supplementsPressbookController.getSupplementId2(req);
     data.date_enlevement_format = data.date_enlevement ? moment(data.date_enlevement, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
-    console.log(data.date_enlevement_format);
     data.parution_format = data.parution ? moment(data.parution, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
     data.date_prod_format = data.date_prod ? moment(data.date_prod, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY'): "";
     data.date_dispo_format = data.date_dispo ? moment(data.date_dispo, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY') : "";
@@ -437,7 +436,7 @@ app.post('/publihome/coiffe', async (req, res) => {
     let dataPublihome = await publihomeController.getPublihomeId2(req.body.id);
     let dataTournee = await publihomeController.getListeTourneesPublihome2(req.body.id);
     dataPublihome.date_portage_format = moment(dataPublihome.date_portage, "YYYY-MM-DDTHH:mm:ss.sssZ").format('DD/MM/YYYY');
-    let data= {dataPublihome : dataPublihome , dataTournee : dataTournee , paquet: req.body.paquet}
+    let data= {dataPublihome : dataPublihome , dataTournee : dataTournee , paquet: req.body.paquet, typeQuantite: req.body.typeQuantite}
     await pdfController.createPdf(req, res, data , 'views/template/coiffes.ejs', 'landscape', 'coiffes.pdf');
 });
 

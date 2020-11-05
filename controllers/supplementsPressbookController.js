@@ -255,7 +255,6 @@ const getSupplementsEnCours = async (req, res) => {
 
 const getSupplementsListe = async (req, res) => {
     try {
-        console.log(req.body);
         let dateDebut = moment(req.body.dateDebut);
         let dateFin = (moment(req.body.dateFin).add(1, 'days'));
 

@@ -54,12 +54,8 @@ const getElements = () => {
         url : "/configuration/elements/req",
         dataType : 'json',
         success : (data) =>{
-            console.log(data.data);
             $.each(data.data, (key, elem) => {
-                console.log(key);
-                console.log(elem);
                 const table = document.getElementById(key);
-                console.log(table);
                 for(let x of elem){
                     const row = table.insertRow(-1);
 
@@ -153,7 +149,6 @@ const deleteRowDB = async (o)=> {
     if (typeof(o) == "object") {
         const idTab = $(o).closest("tbody")[0].id;
         let id = $(o).attr("id");
-        console.log(id);
         $.ajax({
             type: "DELETE",
             contentType : "application/json",
