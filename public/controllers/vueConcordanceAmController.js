@@ -20,9 +20,12 @@ $(document).ready(function () {
             for(let i of tournee){
                 liste.push(i);
             }
+            let quantiteTotale = 0;
             liste.forEach((value) =>{
                 $("#tableauListeConcordanceAm").append("<tr><td>"+value.num_tournee+"</td><td style='text-align:left'>"+value.nom_tournee+"</td><td style='text-align:left'>"+value.edition+"</td><td>"+value.secteur+"</td><td style='text-align:left'>"+value.routage+"</td><td style='text-align:left'>"+value.lieu_depot+"</td> <td>"+value.manager+"</td><td>"+value.net+"</td> </tr>");
+                quantiteTotale += parseInt(value.net);
             });
+            $("#sommeQuantiteNet span").append(quantiteTotale);
             $('#tableauListeConcordanceAm').addClass(" datatable-buttons-tournee table table-striped table-bordered dt-responsive");
             $('#tableauListeConcordanceAm').DataTable({
                 dom: "Bfrtip",

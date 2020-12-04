@@ -12,7 +12,7 @@
                     <li><a href="/pressbook/liste">Liste</a></li>
                 </ul>
             </li>
-            <% if (infoUser.service !== "Impression" ) {%>
+ 
             <li><a><i class="fa fa-truck"></i>Publihome<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <% if (infoUser.service === "Communication" || infoUser.service === "Achat" || infoUser.service === "Admin") {%>
@@ -23,7 +23,7 @@
                    
                 </ul>
             </li>
-            <% } %>
+      
 
 
         </ul>
@@ -49,6 +49,18 @@
                     <li><a href="/configuration/tournees">Tournée</a></li>
                     <li><a href="/configuration/email">Email</a></li>
                     <li><a href="/configuration/elements">Elements</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<% } %>
+<% if ( infoUser.service === "Transport") {%>
+    <div class="menu_section">
+        <h3>Paramétrage</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-gears"></i>Configuration <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/configuration/tournees">Tournée</a></li>
                 </ul>
             </li>
         </ul>

@@ -34,16 +34,20 @@ const serviceUser = async (service) => {
         switch (service) {
             case "Maintenance Generale" :
             case "Achat/Approvisionnement" :
+            case "Maintenance Generale":
                 droitService = "Achat";
                 break;
             case "Developpement" :
                 droitService = "Communication";
                 break;
             case "Logistique" :
+            case "Logistique Am" :
+            case "Logistique Var" :
                 droitService = "Transport";
                 break;
             case "Impression" :
             case "Expeditions" : 
+            case "Prepresse":
                 droitService = "Impression";
                 break;
             case "Etudes Developpement" :

@@ -8,6 +8,7 @@ const https = require('https');
 const fs = require('fs');
 
 
+
 moment.locale('fr');
 
 
@@ -20,6 +21,7 @@ const concordanceController = require('./controllers/concordanceController');
 const emailController = require('./controllers/emailController');
 const pdfController = require('./controllers/pdfController');
 const parametrageTourneesController = require('./controllers/parametrageTourneesController');
+const cronController = require('./controllers/cronController');
 /* imports helpers */
 const serverHelpers = require('./helpers/serverHelpers');
 
@@ -28,8 +30,6 @@ const cookieParser = require('cookie-parser');
 
 const jwt = require('jsonwebtoken');
 
-
-// mongodb://mongoAdmin:MongaNm2020@muroise.nicematin.ad:27017/mydb
 mongoose.connect(CONFIG.dbConfig, {
     //mongoose.connect('mongodb://localhost:27017/suivi_de_prod', {
     useNewUrlParser: true,
@@ -37,7 +37,6 @@ mongoose.connect(CONFIG.dbConfig, {
     useCreateIndex: true,
     useFindAndModify: false
 });
-
 const app = express();
 
 //moteur de template
@@ -113,18 +112,22 @@ app.get('/tmp', async (req, res) => {
 
     if (serviceConnecte === "Achat") {
         return res.redirect('/pressbook/saisie');
-    } else if (serviceConnecte === "Communication") {
+    } 
+    else if (serviceConnecte === "Communication") {
         return res.redirect('/publihome/saisie');
-    } else if (serviceConnecte === "Transport") {
+    } 
+    else if (serviceConnecte === "Transport") {
         return res.redirect('/publihome/liste');
-    } else if (serviceConnecte === "Admin") {
+    } 
+    else if (serviceConnecte === "Admin") {
         return res.redirect('/pressbook/saisie');
-    } else if (serviceConnecte === "Impression") {
+    } 
+    else if (serviceConnecte === "Impression") {
         return res.redirect('/pressbook/liste');
-    } else {
+    } 
+    else {
         return res.redirect('/pressbook/saisie');
     }
-
 });
 
 
@@ -259,7 +262,7 @@ app.get('/configuration/tournees', async (req, res) => {
     const droitUser = { service: req.cookies.service, info: req.cookies.info, poste: req.cookies.poste };
 
     if (droitUser.service !== 'null') {
-        (droitUser.service === "Admin") ?
+        (droitUser.service === "Admin" || droitUser.service === "Transport") ?
             res.render('configuration_tournees', {infoUser: droitUser}) : res.render('error/page_404', {infoUser: droitUser});
     } else {
         res.render('error/page_404', {infoUser: droitUser});
