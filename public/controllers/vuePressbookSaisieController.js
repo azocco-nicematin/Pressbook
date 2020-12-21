@@ -79,14 +79,11 @@ $(document).ready(function () {
         }
         else if(type === "DELETE"){
             let id = $(".modifierPressbook").attr('id');
+            let data = form.serialize()  + "&idSupp=" + id;
             $.ajax({
                 type: type,
-                contentType : "application/json",
                 url: url,
-                data : JSON.stringify({
-                    "idSupp" : id
-                }),
-                dataType : 'json',
+                data : data,
                 success: function (data) {
                     $("#formulaire")[0].reset();
                    
@@ -264,7 +261,7 @@ const createTableauSaisie = () => {
                 }
 
                 if (pressbook.date) {
-                    cell2.innerHTML = moment(pressbook.date).format('YYYY-MM-DD HH:mm');
+                    cell2.innerHTML = moment(pressbook.date).format('YYYY-MM-DD HH:mm')+" par "+pressbook.login;
                 }
 
                 if (pressbook.theme) {
@@ -276,7 +273,7 @@ const createTableauSaisie = () => {
                     cell4.innerHTML = pressbook.suppl;
                     switch(pressbook.suppl){
                         case "TAP":
-                        case "Autres produit":
+                        case "Autres produits":
                             cell4.style.backgroundColor = "#ffe6ff";
                             break;
                         case "Memostick":

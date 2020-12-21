@@ -47,39 +47,44 @@ const getParamTournee = async () =>{
                 const cell6 = row.insertCell(5);
                 const cell7 = row.insertCell(6);
                 const cell8 = row.insertCell(7);
+                const cell9 = row.insertCell(8);
 
                 cell1.style.textAlign = "center"; // edition
                 cell1.style.verticalAlign = "middle";
-            
-                cell2.style.verticalAlign = "middle";
-                cell2.style.padding = "5px";
-  
-                cell3.style.textAlign = "center"; // edition
-                cell3.style.verticalAlign = "middle";
 
+                cell2.style.textAlign = "center"; // edition
+                cell2.style.verticalAlign = "middle";
+            
+                cell3.style.verticalAlign = "middle";
+                cell3.style.padding = "5px";
+  
                 cell4.style.textAlign = "center"; // edition
                 cell4.style.verticalAlign = "middle";
 
+                cell5.style.textAlign = "center"; // edition
                 cell5.style.verticalAlign = "middle";
-                cell5.style.padding = "5px";
-          
+
                 cell6.style.verticalAlign = "middle";
                 cell6.style.padding = "5px";
-       
-                cell7.style.textAlign = "center"; // edition
+          
                 cell7.style.verticalAlign = "middle";
+                cell7.style.padding = "5px";
+       
+                cell8.style.textAlign = "center"; // edition
+                cell8.style.verticalAlign = "middle";
 
                 cell1.innerHTML = donnes.num_tournee;
-                cell2.innerHTML = donnes.nom_tournee;
-                cell3.innerHTML = donnes.edition;
-                cell4.innerHTML = donnes.secteur;
-                cell5.innerHTML = donnes.routage;
-                cell6.innerHTML = donnes.lieu_depot;
-                cell7.innerHTML = donnes.manager;
+                cell2.innerHTML = donnes.ilot;
+                cell3.innerHTML = donnes.nom_tournee;
+                cell4.innerHTML = donnes.edition;
+                cell5.innerHTML = donnes.secteur;
+                cell6.innerHTML = donnes.routage;
+                cell7.innerHTML = donnes.lieu_depot;
+                cell8.innerHTML = donnes.manager;
 
 
 
-                cell8.innerHTML =
+                cell9.innerHTML =
                     "<div class='border-cells' style=\"text-align: center; vertical-align: middle\">" +
                     "<span class=\"table-remove\">" +
                     "<button type=\"button\" style='width: 20px; height : 20px; margin-top : 5px; padding:0px' onclick = \"deleteRowDB(this)\" class=\"btn btn-danger btn-rounded btn-sm my-0\"><i class='fa fa-close'></i>" +
@@ -105,39 +110,45 @@ const addLine = () => {
     const cell6 = row.insertCell(5);
     const cell7 = row.insertCell(6);
     const cell8 = row.insertCell(7);
+    const cell9 = row.insertCell(8);
 
     cell1.style.textAlign = "center"; // edition
     cell1.style.verticalAlign = "middle";
     cell1.contentEditable = "true";
 
+    cell2.style.textAlign = "center"; // edition
     cell2.style.verticalAlign = "middle";
     cell2.contentEditable = "true";
-    
 
-    cell3.style.textAlign = "center"; // edition
+
     cell3.style.verticalAlign = "middle";
-    cell3.contentEditable = "false";
-    cell3.textContent = $("#edition option:selected").text();
+    cell3.contentEditable = "true";
+    
 
     cell4.style.textAlign = "center"; // edition
     cell4.style.verticalAlign = "middle";
-    cell4.contentEditable = "true";
+    cell4.contentEditable = "false";
+    cell4.textContent = $("#edition option:selected").text();
 
+    cell5.style.textAlign = "center"; // edition
     cell5.style.verticalAlign = "middle";
     cell5.contentEditable = "true";
-    
 
     cell6.style.verticalAlign = "middle";
     cell6.contentEditable = "true";
+    
 
-    cell7.style.textAlign = "center"; // edition
     cell7.style.verticalAlign = "middle";
     cell7.contentEditable = "true";
+
+    cell8.style.textAlign = "center"; // edition
+    cell8.style.verticalAlign = "middle";
+    cell8.contentEditable = "true";
     
 
     row.style.boxShadow="0px 0px 8px 0px #51cbee";
 
-    cell8.innerHTML =
+    cell9.innerHTML =
         "<div class='border-cells' style=\"text-align: center; vertical-align: middle\">" +
         "<span class=\"table-remove\">" +
         "<button type=\"button\" style='margin-top: 5px;' onclick = \"validateRow(this)\" class=\"btn btn-success btn-rounded btn-sm my-0\">Valider" +
@@ -156,10 +167,11 @@ const validateRow = (o)=> {
         if($(o).closest("tr")[0].cells[0].textContent !== '' && $(o).closest("tr")[0].cells[1].textContent !== ''&& $(o).closest("tr")[0].cells[3].textContent !== '' && $(o).closest("tr")[0].cells[4].textContent !== ''&& $(o).closest("tr")[0].cells[5].textContent !== '' && $(o).closest("tr")[0].cells[6].textContent !== '' ) {
             $(o).closest("tr")[0].cells[0].contentEditable = "false";
             $(o).closest("tr")[0].cells[1].contentEditable = "false";
-            $(o).closest("tr")[0].cells[3].contentEditable = "false";
+            $(o).closest("tr")[0].cells[2].contentEditable = "false";
             $(o).closest("tr")[0].cells[4].contentEditable = "false";
             $(o).closest("tr")[0].cells[5].contentEditable = "false";
             $(o).closest("tr")[0].cells[6].contentEditable = "false";
+            $(o).closest("tr")[0].cells[7].contentEditable = "false";
             $(o).closest("tr")[0].style.boxShadow="0px 0px #fff";
             $(o).closest("tr")[0].style.border="1px solid #ddd";
             $(o)[0].style.display = "none";
@@ -167,11 +179,13 @@ const validateRow = (o)=> {
 
             let edition = $("#edition option:selected").text();
             let numTournee = $(o).closest("tr")[0].cells[0].textContent;
-            let nomTournee = $(o).closest("tr")[0].cells[1].textContent;
-            let secteur = $(o).closest("tr")[0].cells[3].textContent;
-            let routage = $(o).closest("tr")[0].cells[4].textContent;
-            let lieuDepot = $(o).closest("tr")[0].cells[5].textContent;
-            let manager = $(o).closest("tr")[0].cells[6].textContent;
+            let ilot = $(o).closest("tr")[0].cells[1].textContent;
+            let nomTournee = $(o).closest("tr")[0].cells[2].textContent;
+            let secteur = $(o).closest("tr")[0].cells[4].textContent;
+            let routage = $(o).closest("tr")[0].cells[5].textContent;
+            let lieuDepot = $(o).closest("tr")[0].cells[6].textContent;
+            let manager = $(o).closest("tr")[0].cells[7].textContent;
+            
 
             $.ajax({
                 type: "POST",
@@ -180,6 +194,7 @@ const validateRow = (o)=> {
                 data : JSON.stringify({
                     "edition" : edition,
                     "numTournee" : numTournee,
+                    "ilot" : ilot,
                     "nomTournee" : nomTournee,
                     "secteur": secteur,
                     "routage" : routage,
@@ -237,11 +252,12 @@ const deleteRowDB = async (o)=> {
     if (typeof(o) == "object") {
         let edition = $("#edition option:selected").text();
             let numTournee = $(o).closest("tr")[0].cells[0].textContent;
-            let nomTournee = $(o).closest("tr")[0].cells[1].textContent;
-            let secteur = $(o).closest("tr")[0].cells[3].textContent;
-            let routage = $(o).closest("tr")[0].cells[4].textContent;
-            let lieuDepot = $(o).closest("tr")[0].cells[5].textContent;
-            let manager = $(o).closest("tr")[0].cells[6].textContent;
+            let ilot = $(o).closest("tr")[0].cells[1].textContent;
+            let nomTournee = $(o).closest("tr")[0].cells[2].textContent;
+            let secteur = $(o).closest("tr")[0].cells[4].textContent;
+            let routage = $(o).closest("tr")[0].cells[5].textContent;
+            let lieuDepot = $(o).closest("tr")[0].cells[6].textContent;
+            let manager = $(o).closest("tr")[0].cells[7].textContent;
         $.ajax({
             type: "DELETE",
             contentType : "application/json",
@@ -249,6 +265,7 @@ const deleteRowDB = async (o)=> {
             data : JSON.stringify({
                 "edition" : edition,
                 "numTournee" : numTournee,
+                "ilot" : ilot,
                 "nomTournee" : nomTournee,
                 "secteur": secteur,
                 "routage" : routage,

@@ -140,7 +140,7 @@
                                   <td align='center' bgcolor='#ff6f6f' role='presentation'
                                     style='background-color:#003366;border:none;border-radius:5px;cursor:auto;padding:10px 25px;'
                                     valign='middle'>
-                                    <a href='https://muroise.nicematin.ad:3000'
+                                    <a href='https://pbook.nicematin.ad'
                                       style='background:#003366 ;color:#ffffff;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-weight:400;line-height:21px;margin:0;text-decoration:none;text-transform:none;'
                                       target='_blank'>
                                       Pressbook
@@ -180,7 +180,15 @@
                             <td align='center' style='font-size:0px;padding:10px 25px;word-break:break-word;'>
                               <div
                                 style='color:#4d4d4d;font-family:Oxygen, Helvetica neue, sans-serif;font-size:32px;font-weight:700;line-height:37px;text-align:center;'>
+                                <% if(type === "ajout"){  %>
                                 Noveau supplément publicitaire ajouté
+                                <% }%>
+                                <% if(type === "modif"){  %>
+                                  Noveau supplément publicitaire modifié
+                                  <% }%>
+                                  <% if(type === "supprime"){  %>
+                                    Noveau supplément publicitaire supprimé
+                                    <% }%>
                               </div>
                             </td>
                           </tr>

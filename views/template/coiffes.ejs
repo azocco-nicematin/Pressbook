@@ -43,10 +43,10 @@
 <tr>
 <td class="titre">QUANTITE :</td>
 <% if( typeQuantite === "net"){ %>
-<td class="titre" style="font-weight: bold; font-size: small;" ><%= tournee.net%paquet  %> + <%= Math.floor(tournee.net/paquet)  %> paquets (<%= paquet %>)</td>
+<td class="titre" style="font-weight: bold; font-size: small;" >Total : <%= tournee.net %>  =>  <%= Math.floor(tournee.net/paquet)  %> paquets (<%= paquet %>) + <%= tournee.net%paquet  %></td>
 <% } %>
 <% if( typeQuantite === "net10"){ %>
-    <td class="titre" style="font-weight: bold; font-size: small;" ><%= tournee.net10%paquet  %> + <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>)</td>
+    <td class="titre" style="font-weight: bold; font-size: small;" >Total :  <%=tournee.net10 %> =>  <%= Math.floor(tournee.net10/paquet)  %> paquets (<%= paquet %>) + <%= tournee.net10%paquet  %></td>
     <% } %>
 </tr>
 <tr>

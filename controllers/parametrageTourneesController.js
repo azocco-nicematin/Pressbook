@@ -38,8 +38,10 @@ const getParamTournees = async (req, res) => {
 const createTournee = async (req, res, infosConnectedUser, serviceUsers) => {
     try {
         let loginUser = infosConnectedUser.adresseMail.replace("@nicematin.fr", "");
+        let numTourneeFormat = req.body.numTournee.charAt(0).toUpperCase() + req.body.numTournee.slice(1);
         let item = {
-            num_tournee: req.body.numTournee,
+            num_tournee: numTourneeFormat,
+            ilot: req.body.ilot,
             nom_tournee: req.body.nomTournee,
             edition: req.body.edition,
             secteur: req.body.secteur,

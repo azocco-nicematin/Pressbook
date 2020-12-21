@@ -60,7 +60,7 @@ const createRapportPressbook = (dateDebut, dateFin) => {
                 responsive: true
               });
               $(".suppl").each(function(index, element){
-                if($( this ).text() == "TAP" || $( this ).text() == "Autres produit"){
+                if($( this ).text() == "TAP" || $( this ).text() == "Autres produits"){
                     $( element ).css( "backgroundColor", "#ffe6ff" );
                 }
                 else if($( this ).text() == "Memostick"){

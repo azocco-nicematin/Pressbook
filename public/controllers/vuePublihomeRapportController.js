@@ -28,8 +28,15 @@ const createListeRapportPublihome = (dateDebut, dateFin) => {
                 liste.push(i);
             }
             liste.forEach((value) =>{
-                let tournees = value.tournee ? "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+value._id+"\" >Liste des tournées</a>" : "Tournées non renseignées"
-                $("#listePublihome").append("<tr><td>"+value.idPublihome+"</td><td>"+moment(value.date).format('YYYY-MM-DD')+"</td><td>"+value.titre+"</td><td>"+value.type+"</td><td>"+value.quantite_totale+"</td><td>"+moment(value.date_portage).format('YYYY-MM-DD')+"</td><td>"+value.poid+"</td><td>"+value.nombres_pages+"</td><td>"+value.conditionnement+"</td><td>"+value.commentaire+"</td><td>"+tournees+"</td><td>"+value.etat+"</td></tr>")
+              let type = value.type !== undefined ? value.type : "";
+                let tournees = value.tournee ? "<a class=\"lienTitre\" href=\"/publihome/liste/id/"+value._id+"\" >Liste des tournées</a>" : "Tournées non renseignées";
+                if(value.etat === "Annulé"){
+                  $("#listePublihome").append("<tr style='background-color:#737373'><td>"+value.idPublihome+"</td><td>"+moment(value.date).format('YYYY-MM-DD')+"</td><td>"+value.titre+"</td><td>"+type+"</td><td>"+value.quantite_totale+"</td><td>"+moment(value.date_portage).format('YYYY-MM-DD')+"</td><td>"+value.poid+"</td><td>"+value.nombres_pages+"</td><td>"+value.conditionnement+"</td><td>"+value.commentaire+"</td><td>"+tournees+"</td><td>"+value.etat+"</td></tr>");
+                }
+                else{
+                  $("#listePublihome").append("<tr><td>"+value.idPublihome+"</td><td>"+moment(value.date).format('YYYY-MM-DD')+"</td><td>"+value.titre+"</td><td>"+type+"</td><td>"+value.quantite_totale+"</td><td>"+moment(value.date_portage).format('YYYY-MM-DD')+"</td><td>"+value.poid+"</td><td>"+value.nombres_pages+"</td><td>"+value.conditionnement+"</td><td>"+value.commentaire+"</td><td>"+tournees+"</td><td>"+value.etat+"</td></tr>");
+                }
+                
             });
             $("#listePublihome").addClass(" table table-striped table-bordered dt-responsive");
             $('#listePublihome').DataTable({

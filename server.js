@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const moment = require('./moment-with-locales');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 
@@ -21,7 +22,7 @@ const concordanceController = require('./controllers/concordanceController');
 const emailController = require('./controllers/emailController');
 const pdfController = require('./controllers/pdfController');
 const parametrageTourneesController = require('./controllers/parametrageTourneesController');
-const cronController = require('./controllers/cronController');
+//const cronController = require('./controllers/cronController');
 /* imports helpers */
 const serverHelpers = require('./helpers/serverHelpers');
 
@@ -298,10 +299,12 @@ app.post('/pressbook/saisie/req', async (req, res) => {
         return res.redirect('/');
     }
     await supplementsPressbookController.createSupplement(req, res, req.cookies.info, req.cookies.service);
+    if (req.body.suppl === "TAP"){
     const mailPressbook = "/mail_pressbook.ejs";
     const listeEmail = await parametrageEmailController.getEmailAutorise();
     const subjectIncident = "Nouveau suppléments";
-    emailController.sendEmail(req, res, mailPressbook, listeEmail, subjectIncident, req.cookies.service);
+    emailController.sendEmail(req, res, mailPressbook, listeEmail, subjectIncident, req.cookies.service, "ajout");
+    }
 });
 
 app.put('/pressbook/saisie/req', async (req, res) => {
@@ -309,6 +312,12 @@ app.put('/pressbook/saisie/req', async (req, res) => {
         return res.redirect('/');
     }
     await supplementsPressbookController.updateSupplement(req, res, req.cookies.info, req.cookies.service);
+    if (req.body.suppl === "TAP"){
+        const mailPressbook = "/mail_pressbook.ejs";
+        const listeEmail = await parametrageEmailController.getEmailAutorise();
+        const subjectIncident = "Suppléments Modifie";
+        emailController.sendEmail(req, res, mailPressbook, listeEmail, subjectIncident, req.cookies.service, "modif");
+        }
 });
 
 
@@ -317,6 +326,12 @@ app.delete('/pressbook/saisie/req', async (req, res) => {
         return res.redirect('/');
     }
     await supplementsPressbookController.deleteSupplement(req, res, req.cookies.info, req.cookies.service);
+    if (req.body.suppl === "TAP"){
+        const mailPressbook = "/mail_pressbook.ejs";
+        const listeEmail = await parametrageEmailController.getEmailAutorise();
+        const subjectIncident = "Suppléments Supprime";
+        emailController.sendEmail(req, res, mailPressbook, listeEmail, subjectIncident, req.cookies.service, "supprime");
+        }
 });
 
 

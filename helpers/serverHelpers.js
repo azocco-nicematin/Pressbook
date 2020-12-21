@@ -43,6 +43,7 @@ const serviceUser = async (service) => {
             case "Logistique" :
             case "Logistique Am" :
             case "Logistique Var" :
+            case "Antibes" : 
                 droitService = "Transport";
                 break;
             case "Impression" :

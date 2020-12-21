@@ -19,17 +19,18 @@ let transporter = nodemailer.createTransport(CONFIG.mailCredentials);
  * @param {string} info - Titre du mail
  * @param {string} serviceUser - Service de l'utilisateur concerné par le mail
  */
-const sendEmail = (req, res, mail, listeEmail, subject, serviceUser) => {
+const sendEmail = (req, res, mail, listeEmail, subject, serviceUser, type) => {
     try {
         ejs.renderFile('views/mail' + mail, {
             info : req.body,
             serviceUser: serviceUser,
+            type : type
         }, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
                 let mainOptions = {
-                    from: 'pressbook-noreply@nicematin.fr',
+                    from: 'Pressbook <pressbook-noreply@nicematin.fr>',
                     to: listeEmail,
                     subject: subject,
                     html: data,

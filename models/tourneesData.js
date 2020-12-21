@@ -13,6 +13,7 @@ const tourneeDataSchema = new Schema({
     manager :{type: String},
     net :{type: String},
     net10 :{type: String},
+    ilot : {type: String},
     
     login: {type: String},
     serviceUser: {type : String}

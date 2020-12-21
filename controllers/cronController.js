@@ -1,4 +1,4 @@
-const cron = require('node-cron');
+/*const cron = require('node-cron');
 const csvtojson = require("csvtojson");
 const quantiteTourneesData = require('../models/quantiteTourneesData');
 
@@ -31,3 +31,4 @@ const createQuantiteTournee = async (item) => {
         console.log(err);
     }
 };
+*/
